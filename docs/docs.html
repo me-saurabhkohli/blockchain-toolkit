@@ -1,20 +1,65 @@
----
-layout: default
-title: "Documentation - Blockchain Toolkit"
-description: "Comprehensive documentation for Blockchain Toolkit VS Code extension with guides, API reference, and examples."
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - Blockchain Toolkit</title>
+    <meta name="description" content="Comprehensive documentation for Blockchain Toolkit VS Code extension with guides, API reference, and examples.">
+    <meta name="keywords" content="blockchain, ethereum, solidity, documentation, API reference, VS Code extension, Web3">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
 
 <style>
 :root {
-  --primary-yellow: #FFF04D;
-  --bg-dark: #1E1823;
-  --bg-secondary: #2A2834;
+  --primary-color: #FFF04D;
+  --secondary-color: #1E1823;
+  --accent-color: #9CA3AF;
+  --bg-dark: #0F0F23;
+  --bg-card: #1A1A2E;
   --text-primary: #FFFFFF;
-  --text-secondary: #9CA3AF;
-  --border-light: #E5E7EB;
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  --border-radius-lg: 12px;
-  --border-radius-xl: 16px;
+  --text-secondary: #B0B3B8;
+  --border-color: #2D2D44;
+  --success-color: #10B981;
+  --gradient-primary: linear-gradient(135deg, #FFF04D 0%, #F59E0B 100%);
+  --gradient-dark: linear-gradient(135deg, #0F0F23 0%, #1A1A2E 100%);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+  --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-primary);
+  line-height: 1.7;
+}
+
+/* Override GitHub Pages default styles */
+.page-header {
+  background: var(--bg-dark) !important;
+  border-bottom: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.project-name, .project-tagline {
+  display: none !important;
+}
+
+.main-content {
+  max-width: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: var(--bg-dark) !important;
+  color: var(--text-primary) !important;
 }
 
 .docs-container {
@@ -22,24 +67,29 @@ description: "Comprehensive documentation for Blockchain Toolkit VS Code extensi
   margin: 0 auto;
   padding: 2rem 1.5rem;
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 280px 1fr;
   gap: 3rem;
+  min-height: 100vh;
 }
 
 .docs-sidebar {
   position: sticky;
   top: 2rem;
   height: fit-content;
-  background: #F8F9FA;
-  border-radius: var(--border-radius-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
   padding: 2rem;
 }
 
 .docs-nav-title {
   font-size: 1.25rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 1.5rem;
-  color: var(--bg-dark);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .docs-nav-section {
@@ -47,11 +97,11 @@ description: "Comprehensive documentation for Blockchain Toolkit VS Code extensi
 }
 
 .docs-nav-section h4 {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #666;
+  color: var(--text-secondary);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   margin-bottom: 0.75rem;
 }
 
@@ -62,51 +112,217 @@ description: "Comprehensive documentation for Blockchain Toolkit VS Code extensi
 }
 
 .docs-nav-links li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .docs-nav-links a {
   display: block;
-  padding: 0.5rem 0.75rem;
-  border-radius: var(--border-radius-lg);
-  color: #666;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
   transition: all 0.2s ease;
   font-size: 0.875rem;
   text-decoration: none;
+  border: 1px solid transparent;
 }
 
-.docs-nav-links a:hover,
-.docs-nav-links a.active {
-  background: var(--primary-yellow);
-  color: var(--bg-dark);
+.docs-nav-links a:hover {
+  background: rgba(255, 240, 77, 0.1);
+  color: var(--primary-color);
+  border-color: rgba(255, 240, 77, 0.3);
   text-decoration: none;
 }
 
+.docs-nav-links a.active {
+  background: var(--gradient-primary);
+  color: var(--secondary-color);
+  font-weight: 600;
+  border-color: transparent;
+}
+
 .docs-content {
-  background: white;
-  border-radius: var(--border-radius-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
   padding: 3rem;
-  box-shadow: var(--shadow-md);
-  border: 1px solid #E5E7EB;
+  min-height: 600px;
 }
 
 .docs-header {
-  border-bottom: 2px solid var(--border-light);
+  border-bottom: 1px solid var(--border-color);
   padding-bottom: 2rem;
   margin-bottom: 3rem;
 }
 
 .docs-title {
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: 2.5rem;
+  font-weight: 800;
   margin-bottom: 1rem;
-  color: var(--bg-dark);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .docs-subtitle {
   font-size: 1.125rem;
-  color: #666;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.docs-section {
+  margin-bottom: 3rem;
+}
+
+.docs-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.docs-section h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  color: var(--text-primary);
+}
+
+.docs-section h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 2rem 0 0.75rem;
+  color: var(--text-primary);
+}
+
+.docs-section p {
+  margin-bottom: 1.5rem;
   line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.docs-section ul,
+.docs-section ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+  color: var(--text-secondary);
+}
+
+.docs-section li {
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.code-block {
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  overflow-x: auto;
+  position: relative;
+}
+
+.code-block::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  background: rgba(255, 240, 77, 0.2);
+  color: var(--primary-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.inline-code {
+  background: var(--bg-dark);
+  color: var(--primary-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-color);
+}
+
+.callout {
+  border-left: 4px solid var(--primary-color);
+  background: rgba(255, 240, 77, 0.05);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 0 0.75rem 0.75rem 0;
+  border: 1px solid rgba(255, 240, 77, 0.2);
+}
+
+.callout-title {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.callout p {
+  margin-bottom: 0;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.feature-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  transform-origin: left;
+}
+
+.feature-item:hover::before {
+  transform: scaleX(1);
+}
+
+.feature-item:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 240, 77, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.feature-item h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .command-list {
@@ -116,49 +332,166 @@ description: "Comprehensive documentation for Blockchain Toolkit VS Code extensi
 }
 
 .command-item {
-  background: #F8F9FA;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
   padding: 1rem 1.5rem;
-  border-radius: var(--border-radius-lg);
-  border-left: 4px solid var(--primary-yellow);
+  border-radius: 0.75rem;
+  border-left: 4px solid var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.command-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 240, 77, 0.3);
 }
 
 .command-name {
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
   font-weight: 600;
-  color: var(--bg-dark);
+  color: var(--text-primary);
   margin-bottom: 0.5rem;
-}
-
-.command-description {
-  color: #666;
-  margin: 0;
   font-size: 0.875rem;
 }
 
-.feature-grid {
+.command-description {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.back-to-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+  transition: color 0.3s ease;
+}
+
+.back-to-home:hover {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.feature-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+.feature-link:hover {
+  color: var(--text-primary);
+  text-decoration: underline;
+}
+
+/* Feature Deep Dives */
+.feature-deep-dives {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.feature-deep-dives h3 {
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.deep-dive-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin: 2rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
 }
 
-.feature-item {
-  background: #F8F9FA;
-  padding: 1.5rem;
-  border-radius: var(--border-radius-lg);
-  border: 2px solid transparent;
-  transition: all 0.2s ease;
+.deep-dive-card {
+  background: linear-gradient(135deg, rgba(255, 240, 77, 0.05) 0%, rgba(255, 240, 77, 0.02) 100%);
+  border: 1px solid rgba(255, 240, 77, 0.2);
+  border-radius: 1rem;
+  padding: 2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  display: block;
+  position: relative;
+  overflow: hidden;
 }
 
-.feature-item:hover {
-  border-color: var(--primary-yellow);
-  transform: translateY(-2px);
+.deep-dive-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 240, 77, 0.1), transparent);
+  transition: left 0.5s ease;
 }
 
-.feature-item h4 {
-  margin-top: 0;
+.deep-dive-card:hover {
+  background: linear-gradient(135deg, rgba(255, 240, 77, 0.08) 0%, rgba(255, 240, 77, 0.05) 100%);
+  border-color: rgba(255, 240, 77, 0.4);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+  color: inherit;
+}
+
+.deep-dive-card:hover::before {
+  left: 100%;
+}
+
+.dive-icon {
+  font-size: 3rem;
   margin-bottom: 1rem;
-  color: var(--bg-dark);
+  display: block;
+}
+
+.dive-content h4 {
+  color: var(--primary-color);
+  margin: 0 0 1rem 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.dive-content p {
+  color: var(--text-secondary);
+  margin: 0 0 1.5rem 0;
+  line-height: 1.6;
+}
+
+.dive-features {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dive-features li {
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.dive-features li::before {
+  content: '▸';
+  color: var(--primary-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: bold;
+}
+
+.dive-features li:hover {
+  color: var(--text-primary);
 }
 
 @media (max-width: 768px) {
@@ -184,8 +517,652 @@ description: "Comprehensive documentation for Blockchain Toolkit VS Code extensi
   .feature-grid {
     grid-template-columns: 1fr;
   }
+
+  .deep-dive-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dive-icon {
+    font-size: 2.5rem;
+  }
 }
 </style>
+
+<div class="docs-container">
+  <!-- Sidebar Navigation -->
+  <aside class="docs-sidebar">
+    <h3 class="docs-nav-title">📚 Documentation</h3>
+    
+    <div class="docs-nav-section">
+      <h4>Getting Started</h4>
+      <ul class="docs-nav-links">
+        <li><a href="#installation" class="active">Installation</a></li>
+        <li><a href="#quick-start">Quick Start</a></li>
+        <li><a href="#configuration">Configuration</a></li>
+        <li><a href="#first-project">First Project</a></li>
+      </ul>
+    </div>
+
+    <div class="docs-nav-section">
+      <h4>Core Features</h4>
+      <ul class="docs-nav-links">
+        <li><a href="#compilation">Compilation</a></li>
+        <li><a href="#testing">Testing</a></li>
+        <li><a href="#deployment">Deployment</a></li>
+        <li><a href="#debugging">Debugging</a></li>
+      </ul>
+    </div>
+
+    <div class="docs-nav-section">
+      <h4>Advanced</h4>
+      <ul class="docs-nav-links">
+        <li><a href="#evm-debugging">EVM Debugging</a></li>
+        <li><a href="#frameworks">Multi-Framework</a></li>
+        <li><a href="#cicd">CI/CD Integration</a></li>
+        <li><a href="#security">Security</a></li>
+      </ul>
+    </div>
+
+    <div class="docs-nav-section">
+      <h4>Feature Guides</h4>
+      <ul class="docs-nav-links">
+        <li><a href="features/getting-started.html">🚀 Setup Guide</a></li>
+        <li><a href="features/compilation.html">⚙️ Compilation</a></li>
+        <li><a href="features/debugging.html">🔍 Debugging</a></li>
+        <li><a href="features/testing.html">🧪 Testing</a></li>
+        <li><a href="features/deployment.html">🚀 Deployment</a></li>
+        <li><a href="features/networks.html">🌐 Networks</a></li>
+      </ul>
+    </div>
+
+    <div class="docs-nav-section">
+      <h4>Reference</h4>
+      <ul class="docs-nav-links">
+        <li><a href="#commands">Commands</a></li>
+        <li><a href="#settings">Settings</a></li>
+        <li><a href="#troubleshooting">Troubleshooting</a></li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="docs-content">
+    <a href="index.html" class="back-to-home">← Back to Home</a>
+    
+    <div class="docs-header">
+      <h1 class="docs-title">📚 Documentation</h1>
+      <p class="docs-subtitle">
+        Comprehensive guide to using the Blockchain Toolkit VS Code extension for 
+        professional blockchain development across multiple frameworks and networks.
+      </p>
+    </div>
+
+    <!-- Installation Section -->
+    <section id="installation" class="docs-section">
+      <h2>🚀 Installation & Setup</h2>
+      
+      <h3>Prerequisites</h3>
+      <ul>
+        <li><strong>VS Code</strong> version 1.74.0 or higher</li>
+        <li><strong>Node.js</strong> version 16 or higher</li>
+        <li><strong>npm, yarn, or pnpm</strong> package manager</li>
+        <li>At least one blockchain framework (Hardhat, Truffle, Foundry, etc.)</li>
+      </ul>
+
+      <h3>Install from VS Code Marketplace</h3>
+      <div class="code-block" data-language="bash">ext install blockchain-toolkit</div>
+
+      <p>Or search for "Blockchain Toolkit" in the VS Code Extensions panel.</p>
+
+      <div class="callout">
+        <div class="callout-title">💡 Pro Tip</div>
+        <p>The extension automatically detects blockchain frameworks in your workspace and configures itself accordingly.</p>
+      </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section id="quick-start" class="docs-section">
+      <h2>⚡ Quick Start Guide</h2>
+      
+      <h3>For Existing Projects</h3>
+      <ol>
+        <li>Open your blockchain project in VS Code</li>
+        <li>The extension automatically detects your framework configuration</li>
+        <li>Use the Command Palette (<code class="inline-code">Ctrl+Shift+P</code>) to access blockchain commands</li>
+        <li>Explore the Blockchain Toolkit sidebar for project navigation</li>
+      </ol>
+
+      <h3>For New Projects</h3>
+      <div class="code-block" data-language="bash"># Create new Hardhat project
+mkdir my-blockchain-project
+cd my-blockchain-project
+npx hardhat init
+
+# Open in VS Code
+code .</div>
+
+      <h3>First Commands to Try</h3>
+      <div class="command-list">
+        <div class="command-item">
+          <div class="command-name">Blockchain: Compile Contracts</div>
+          <div class="command-description">Compile all smart contracts in your project</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Run Tests</div>
+          <div class="command-description">Execute your test suite</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Select Network</div>
+          <div class="command-description">Choose your target network for deployment</div>
+        </div>
+      </div>
+    </section>
+
+            <!-- Core Features Section -->
+            <section id="core-features" class="docs-section">
+                <h2>🛠️ Core Features</h2>
+                
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h4>🔧 Multi-Framework Support</h4>
+                        <p>Unified interface for Hardhat, Truffle, Foundry, and Solana with automatic framework detection and seamless switching.</p>
+                        <a href="features/getting-started.html" class="feature-link">Learn More →</a>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>🐛 Advanced Debugging</h4>
+                        <p>Step-through debugging with EVM state inspection, memory analysis, and gas usage tracking across all supported frameworks.</p>
+                        <a href="features/debugging.html" class="feature-link">Learn More →</a>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>🌐 Network Management</h4>
+                        <p>Visual network manager with real-time status monitoring, easy configuration, and support for 50+ networks.</p>
+                        <a href="features/networks.html" class="feature-link">Learn More →</a>
+                    </div>
+                    
+                    <div class="feature-item">
+                        <h4>🧪 Testing Suite</h4>
+                        <p>Comprehensive testing capabilities including coverage analysis, gas optimization, and fuzz testing with detailed reporting.</p>
+                        <a href="features/testing.html" class="feature-link">Learn More →</a>
+                    </div>
+                </div>
+                
+                <!-- Feature Deep Dives -->
+                <div class="feature-deep-dives">
+                    <h3>📚 Feature Deep Dives</h3>
+                    <div class="deep-dive-grid">
+                        <a href="features/getting-started.html" class="deep-dive-card">
+                            <div class="dive-icon">🚀</div>
+                            <div class="dive-content">
+                                <h4>Getting Started</h4>
+                                <p>Complete installation guide, first-time setup, and creating your first blockchain project</p>
+                                <ul class="dive-features">
+                                    <li>Installation & Prerequisites</li>
+                                    <li>Framework Detection</li>
+                                    <li>Project Creation Wizards</li>
+                                    <li>Basic Development Workflow</li>
+                                </ul>
+                            </div>
+                        </a>
+                        
+                        <a href="features/compilation.html" class="deep-dive-card">
+                            <div class="dive-icon">⚙️</div>
+                            <div class="dive-content">
+                                <h4>Smart Contract Compilation</h4>
+                                <p>Advanced compilation features with optimization, error handling, and artifact management</p>
+                                <ul class="dive-features">
+                                    <li>Multi-Framework Compilation</li>
+                                    <li>Gas Optimization Settings</li>
+                                    <li>Error Detection & Resolution</li>
+                                    <li>Artifact Management</li>
+                                </ul>
+                            </div>
+                        </a>
+                        
+                        <a href="features/debugging.html" class="deep-dive-card">
+                            <div class="dive-icon">🔍</div>
+                            <div class="dive-content">
+                                <h4>Advanced EVM Debugging</h4>
+                                <p>Deep EVM state inspection with memory analysis, gas tracking, and transaction debugging</p>
+                                <ul class="dive-features">
+                                    <li>Step-through Debugging</li>
+                                    <li>EVM State Inspection</li>
+                                    <li>Gas Usage Analysis</li>
+                                    <li>Transaction Tracing</li>
+                                </ul>
+                            </div>
+                        </a>
+                        
+                        <a href="features/testing.html" class="deep-dive-card">
+                            <div class="dive-icon">🧪</div>
+                            <div class="dive-content">
+                                <h4>Testing & Coverage</h4>
+                                <p>Comprehensive testing capabilities with coverage analysis and performance optimization</p>
+                                <ul class="dive-features">
+                                    <li>Unit & Integration Testing</li>
+                                    <li>Code Coverage Reports</li>
+                                    <li>Gas Usage Optimization</li>
+                                    <li>Fuzz Testing</li>
+                                </ul>
+                            </div>
+                        </a>
+                        
+                        <a href="features/deployment.html" class="deep-dive-card">
+                            <div class="dive-icon">🚀</div>
+                            <div class="dive-content">
+                                <h4>Contract Deployment</h4>
+                                <p>Multi-network deployment with verification, monitoring, and management tools</p>
+                                <ul class="dive-features">
+                                    <li>Multi-Chain Deployment</li>
+                                    <li>Contract Verification</li>
+                                    <li>Deployment Scripts</li>
+                                    <li>Post-Deploy Monitoring</li>
+                                </ul>
+                            </div>
+                        </a>
+                        
+                        <a href="features/networks.html" class="deep-dive-card">
+                            <div class="dive-icon">🌐</div>
+                            <div class="dive-content">
+                                <h4>Network Management</h4>
+                                <p>Comprehensive network configuration and management with real-time monitoring</p>
+                                <ul class="dive-features">
+                                    <li>Network Configuration</li>
+                                    <li>Real-time Monitoring</li>
+                                    <li>Multi-Chain Support</li>
+                                    <li>Provider Integration</li>
+                                </ul>
+                            </div>
+                        </a>
+                        
+                        <a href="features/security.html" class="deep-dive-card">
+                            <div class="dive-icon">🛡️</div>
+                            <div class="dive-content">
+                                <h4>Security Analysis</h4>
+                                <p>Automated security scanning with vulnerability detection and best practice enforcement</p>
+                                <ul class="dive-features">
+                                    <li>Vulnerability Scanning</li>
+                                    <li>Best Practice Enforcement</li>
+                                    <li>Security Reports</li>
+                                    <li>Audit Integration</li>
+                                </ul>
+                            </div>
+                        </a>
+                        
+                        <a href="features/cicd.html" class="deep-dive-card">
+                            <div class="dive-icon">🔄</div>
+                            <div class="dive-content">
+                                <h4>CI/CD Integration</h4>
+                                <p>Automated testing, deployment, and monitoring with popular CI/CD platforms</p>
+                                <ul class="dive-features">
+                                    <li>GitHub Actions Integration</li>
+                                    <li>Automated Testing</li>
+                                    <li>Deployment Pipelines</li>
+                                    <li>Performance Monitoring</li>
+                                </ul>
+                            </div>
+                        </a>
+                    </div>
+                </div>      <h3 id="compilation">Smart Contract Compilation</h3>
+      <p>Compile your smart contracts across different frameworks:</p>
+      <div class="code-block" data-language="javascript">// Command Palette: "Blockchain: Compile Contracts"
+// Or use keyboard shortcut: Ctrl+Shift+B
+
+// Framework-specific compilation:
+// Hardhat: npx hardhat compile
+// Truffle: truffle compile  
+// Foundry: forge build</div>
+
+      <h3 id="testing">Testing & Coverage</h3>
+      <p>Run comprehensive tests with coverage analysis:</p>
+      <div class="command-list">
+        <div class="command-item">
+          <div class="command-name">Blockchain: Run Tests</div>
+          <div class="command-description">Execute all tests in your project</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Run Coverage Analysis</div>
+          <div class="command-description">Generate detailed test coverage reports</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Run Fuzz Tests</div>
+          <div class="command-description">Execute property-based fuzz testing</div>
+        </div>
+      </div>
+
+      <h3 id="deployment">Smart Contract Deployment</h3>
+      <p>Deploy contracts to multiple networks with comprehensive management:</p>
+      <div class="code-block" data-language="bash"># Select network first
+Blockchain: Select Network
+
+# Deploy contracts
+Blockchain: Deploy Contracts
+
+# Verify on block explorer
+Blockchain: Verify Contract</div>
+    </section>
+
+    <!-- Advanced Features Section -->
+    <section id="advanced-features" class="docs-section">
+      <h2>🌟 Advanced Features</h2>
+      
+      <h3 id="evm-debugging">EVM State Debugging</h3>
+      <p>Advanced EVM debugging capabilities for deep contract analysis:</p>
+      
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h4>Stack Inspection</h4>
+          <p>View and analyze EVM stack contents with automatic type detection and value formatting.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Memory Analysis</h4>
+          <p>Inspect EVM memory with chunk visualization, search functionality, and hex/ASCII views.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Storage Inspection</h4>
+          <p>Deep dive into contract storage slots with variable name resolution and mapping support.</p>
+        </div>
+        <div class="feature-item">
+          <h4>Gas Analysis</h4>
+          <p>Real-time gas usage tracking with optimization suggestions and cost breakdown.</p>
+        </div>
+      </div>
+
+      <div class="code-block" data-language="bash"># Start EVM debugging session
+Blockchain: EVM Debug: Start
+
+# Debug specific transaction
+Blockchain: EVM Debug: Debug Transaction
+
+# Step through execution
+Blockchain: EVM Debug: Step Forward
+Blockchain: EVM Debug: Step Backward
+
+# Inspect EVM state
+Blockchain: EVM Debug: Show Memory Dump
+Blockchain: EVM Debug: Show Stack Trace
+Blockchain: EVM Debug: Show Storage State</div>
+
+      <h3 id="frameworks">Multi-Framework Development</h3>
+      <p>Work with multiple blockchain frameworks in a single workspace:</p>
+      
+      <div class="callout">
+        <div class="callout-title">ℹ️ Framework Detection</div>
+        <p>The extension automatically detects multiple frameworks in your workspace and provides unified commands that work across all detected frameworks.</p>
+      </div>
+
+      <h3 id="cicd">CI/CD Integration</h3>
+      <p>Automated pipeline setup for continuous integration and deployment:</p>
+      
+      <div class="command-list">
+        <div class="command-item">
+          <div class="command-name">Blockchain: Setup GitHub Actions</div>
+          <div class="command-description">Configure automated testing and deployment workflows</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Setup GitLab CI</div>
+          <div class="command-description">Create GitLab CI pipeline configuration</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Run Security Scan</div>
+          <div class="command-description">Execute automated security vulnerability analysis</div>
+        </div>
+      </div>
+
+      <h3 id="security">Security Features</h3>
+      <p>Enterprise-grade security scanning and best practices:</p>
+      
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h4>🔍 Vulnerability Scanning</h4>
+          <p>Automated detection of common smart contract vulnerabilities including reentrancy, overflow, and access control issues.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🛡️ Best Practices</h4>
+          <p>Real-time suggestions for security best practices and code quality improvements.</p>
+        </div>
+        <div class="feature-item">
+          <h4>📊 Security Reports</h4>
+          <p>Detailed security analysis reports with severity levels and remediation suggestions.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🔐 Audit Integration</h4>
+          <p>Integration with popular audit tools and services for comprehensive security analysis.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Commands Reference Section -->
+    <section id="commands" class="docs-section">
+      <h2>💻 Commands Reference</h2>
+      
+      <p>Complete list of available commands accessible via Command Palette (<code class="inline-code">Ctrl+Shift+P</code>):</p>
+
+      <h3>Core Development Commands</h3>
+      <div class="command-list">
+        <div class="command-item">
+          <div class="command-name">Blockchain: Compile Contracts</div>
+          <div class="command-description">Compile all smart contracts using the detected framework</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Run Tests</div>
+          <div class="command-description">Execute the complete test suite</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Deploy Contracts</div>
+          <div class="command-description">Deploy contracts to the selected network</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Clean Artifacts</div>
+          <div class="command-description">Clean compilation artifacts and cache</div>
+        </div>
+      </div>
+
+      <h3>Network Management Commands</h3>
+      <div class="command-list">
+        <div class="command-item">
+          <div class="command-name">Blockchain: Select Network</div>
+          <div class="command-description">Switch between configured networks</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Add Network</div>
+          <div class="command-description">Add a new custom network configuration</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Check Network Status</div>
+          <div class="command-description">Verify connectivity and network information</div>
+        </div>
+      </div>
+
+      <h3>Debugging Commands</h3>
+      <div class="command-list">
+        <div class="command-item">
+          <div class="command-name">Blockchain: Debug Contract</div>
+          <div class="command-description">Start debugging session for current contract</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: EVM Debug: Start</div>
+          <div class="command-description">Launch advanced EVM state debugging</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Debug Transaction</div>
+          <div class="command-description">Debug a specific transaction by hash</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Configuration Section -->
+    <section id="configuration" class="docs-section">
+      <h2>⚙️ Configuration</h2>
+      
+      <p>Customize the extension behavior through VS Code settings:</p>
+
+      <h3>Basic Settings</h3>
+      <div class="code-block" data-language="json">{
+  "blockchain.autoDetectFrameworks": true,
+  "blockchain.defaultNetwork": "localhost",
+  "blockchain.enableDebugMode": false,
+  "blockchain.autoCompile": false,
+  "blockchain.enableGasReporting": true
+}</div>
+
+      <h3>Advanced Configuration</h3>
+      <div class="code-block" data-language="json">{
+  "blockchain.solidity.version": "0.8.19",
+  "blockchain.solidity.optimizer": true,
+  "blockchain.solidity.optimizerRuns": 200,
+  "blockchain.evmDebug": {
+    "autoRefresh": true,
+    "maxStackItems": 50,
+    "enableGasAnalysis": true
+  },
+  "blockchain.security": {
+    "enabledDetectors": [
+      "reentrancy",
+      "access-control",
+      "unchecked-return-value"
+    ],
+    "minSeverity": "medium"
+  }
+}</div>
+
+      <h3>Network Configuration</h3>
+      <p>Networks are configured in your framework's configuration file:</p>
+      
+      <div class="code-block" data-language="javascript">// hardhat.config.js
+module.exports = {
+  networks: {
+    localhost: {
+      url: "http://127.0.0.1:8545",
+      chainId: 31337
+    },
+    goerli: {
+      url: process.env.GOERLI_URL,
+      accounts: [process.env.PRIVATE_KEY],
+      chainId: 5
+    },
+    mainnet: {
+      url: process.env.MAINNET_URL,
+      accounts: [process.env.PRIVATE_KEY],
+      chainId: 1
+    }
+  }
+};</div>
+    </section>
+
+    <!-- Troubleshooting Section -->
+    <section id="troubleshooting" class="docs-section">
+      <h2>🔧 Troubleshooting</h2>
+      
+      <h3>Common Issues</h3>
+      
+      <h4>Extension Not Activating</h4>
+      <ul>
+        <li>Ensure your workspace contains a supported framework configuration file</li>
+        <li>Check the VS Code Output panel for error messages</li>
+        <li>Restart VS Code after installation</li>
+        <li>Verify the extension is enabled in the Extensions panel</li>
+      </ul>
+
+      <h4>Commands Not Working</h4>
+      <ul>
+        <li>Verify framework dependencies are installed (e.g., <code class="inline-code">npm list hardhat</code>)</li>
+        <li>Check terminal output for error messages</li>
+        <li>Enable debug mode in extension settings</li>
+        <li>Ensure proper network configuration</li>
+      </ul>
+
+      <h4>Compilation Errors</h4>
+      <ul>
+        <li>Verify Solidity version compatibility</li>
+        <li>Check import paths and dependencies</li>
+        <li>Clear compilation cache using <code class="inline-code">Blockchain: Clean Artifacts</code></li>
+        <li>Update compiler version in configuration</li>
+      </ul>
+
+      <div class="callout">
+        <div class="callout-title">❓ Need Help?</div>
+        <p>Join our <a href="https://discord.gg/blockchain-toolkit" style="color: var(--primary-color); font-weight: 600;">Discord community</a> or <a href="https://github.com/me-saurabhkohli/blockchain-toolkit/issues" style="color: var(--primary-color); font-weight: 600;">report issues on GitHub</a> for additional support.</p>
+      </div>
+
+      <h3>Debug Mode</h3>
+      <p>Enable debug mode for detailed logging:</p>
+      <div class="code-block" data-language="json">{
+  "blockchain.enableDebugMode": true,
+  "blockchain.logLevel": "debug"
+}</div>
+
+      <p>View logs in VS Code Output panel → "Blockchain Toolkit"</p>
+    </section>
+
+    <!-- Footer Navigation -->
+    <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-color); text-align: center;">
+      <p style="margin-bottom: 2rem; color: var(--text-secondary);">
+        <strong>Ready to start building?</strong> 
+        <a href="https://marketplace.visualstudio.com/items?itemName=blockchain-toolkit" style="color: var(--primary-color); font-weight: 600;">Install the extension</a> 
+        and join thousands of developers building the future of Web3.
+      </p>
+      
+      <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; color: var(--text-secondary);">
+        <a href="index.html" style="color: var(--text-secondary); text-decoration: none;">← Back to Home</a>
+        <a href="https://github.com/me-saurabhkohli/blockchain-toolkit" style="color: var(--text-secondary); text-decoration: none;">GitHub Repository</a>
+        <a href="https://discord.gg/blockchain-toolkit" style="color: var(--text-secondary); text-decoration: none;">Join Discord</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+// Documentation-specific JavaScript
+document.addEventListener('DOMContentLoaded', function() {
+  // Smooth scrolling for sidebar links
+  const sidebarLinks = document.querySelectorAll('.docs-nav-links a');
+  sidebarLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('href');
+      const targetElement = document.querySelector(targetId);
+      
+      if (targetElement) {
+        const headerOffset = 100;
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Update active state
+        sidebarLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+      }
+    });
+  });
+
+  // Update active section based on scroll position
+  const sections = document.querySelectorAll('.docs-section');
+  const navLinks = document.querySelectorAll('.docs-nav-links a');
+  
+  window.addEventListener('scroll', function() {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.getBoundingClientRect().top;
+      if (sectionTop <= 150) {
+        current = section.getAttribute('id');
+      }
+    });
+    
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+});
+</script>
 
 <div class="docs-container">
   <!-- Sidebar Navigation -->
@@ -1274,7 +2251,7 @@ module.exports = {
                 </p>
                 
                 <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-                    <a href="../index.html" style="color: var(--text-secondary);">← Back to Home</a>
+                    <a href="index.html" style="color: var(--text-secondary);">← Back to Home</a>
                     <a href="https://github.com/me-saurabhkohli/blockchain-toolkit" style="color: var(--text-secondary);">GitHub Repository</a>
                     <a href="https://discord.gg/blockchain-toolkit" style="color: var(--text-secondary);">Join Discord</a>
                 </div>

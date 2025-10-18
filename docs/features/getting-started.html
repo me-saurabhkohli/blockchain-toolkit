@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Blockchain Toolkit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/feature-page.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="../assets/logo.png" alt="Blockchain Toolkit" class="logo">
+                <span class="brand-text">Blockchain Toolkit</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="../docs.html" class="nav-link">Documentation</a></li>
+                <li><a href="https://github.com/me-saurabhkohli/blockchain-toolkit" class="nav-link github-link">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="feature-container">
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb">
+            <a href="../index.html">Home</a>
+            <span>/</span>
+            <a href="../docs.html">Documentation</a>
+            <span>/</span>
+            <span>Getting Started</span>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="feature-content">
+            <div class="feature-header">
+                <h1 class="feature-title">
+                    <i class="fas fa-rocket"></i>
+                    Getting Started with Blockchain Toolkit
+                </h1>
+                <p class="feature-subtitle">
+                    Complete step-by-step guide to install, configure, and start developing with the Blockchain Toolkit VS Code extension.
+                </p>
+            </div>
+
+            <!-- Table of Contents -->
+            <div class="toc">
+                <h3><i class="fas fa-list"></i> Contents</h3>
+                <ul>
+                    <li><a href="#installation">Installation</a></li>
+                    <li><a href="#first-setup">First-Time Setup</a></li>
+                    <li><a href="#framework-detection">Framework Detection</a></li>
+                    <li><a href="#creating-project">Creating Your First Project</a></li>
+                    <li><a href="#basic-workflow">Basic Development Workflow</a></li>
+                    <li><a href="#next-steps">Next Steps</a></li>
+                </ul>
+            </div>
+
+            <!-- Installation Section -->
+            <section id="installation" class="feature-section">
+                <h2><i class="fas fa-download"></i> Installation</h2>
+                
+                <div class="step-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Install from VS Code Marketplace</h3>
+                            <p>The easiest way to install the Blockchain Toolkit extension:</p>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span>VS Code Command</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                                </div>
+                                <pre><code>ext install blockchain-toolkit</code></pre>
+                            </div>
+                            <p>Or search for "Blockchain Toolkit" in the Extensions panel (Ctrl+Shift+X)</p>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Verify Installation</h3>
+                            <p>After installation, you should see:</p>
+                            <ul>
+                                <li>Blockchain Toolkit icon in the Activity Bar</li>
+                                <li>New commands in the Command Palette (Ctrl+Shift+P)</li>
+                                <li>"Blockchain Toolkit" output channel</li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Prerequisites Check</h3>
+                            <p>Ensure you have the following installed:</p>
+                            <div class="requirements-grid">
+                                <div class="requirement-item">
+                                    <i class="fab fa-node-js"></i>
+                                    <h4>Node.js</h4>
+                                    <p>Version 16 or higher</p>
+                                    <div class="code-block">
+                                        <pre><code>node --version</code></pre>
+                                    </div>
+                                </div>
+                                <div class="requirement-item">
+                                    <i class="fab fa-npm"></i>
+                                    <h4>Package Manager</h4>
+                                    <p>npm, yarn, or pnpm</p>
+                                    <div class="code-block">
+                                        <pre><code>npm --version</code></pre>
+                                    </div>
+                                </div>
+                                <div class="requirement-item">
+                                    <i class="fab fa-git-alt"></i>
+                                    <h4>Git</h4>
+                                    <p>For version control</p>
+                                    <div class="code-block">
+                                        <pre><code>git --version</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- First Setup Section -->
+            <section id="first-setup" class="feature-section">
+                <h2><i class="fas fa-cogs"></i> First-Time Setup</h2>
+                
+                <div class="callout callout-info">
+                    <div class="callout-icon"><i class="fas fa-lightbulb"></i></div>
+                    <div class="callout-content">
+                        <h4>Auto-Configuration</h4>
+                        <p>The extension automatically detects and configures itself based on your project structure. No manual setup required for most projects!</p>
+                    </div>
+                </div>
+
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fas fa-search"></i></div>
+                        <h3>Automatic Detection</h3>
+                        <p>The extension automatically scans your workspace for:</p>
+                        <ul>
+                            <li>Hardhat configuration files</li>
+                            <li>Truffle configuration files</li>
+                            <li>Foundry project structure</li>
+                            <li>Solana/Anchor projects</li>
+                            <li>Package.json dependencies</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fas fa-sliders-h"></i></div>
+                        <h3>Configuration Options</h3>
+                        <p>Customize the extension behavior:</p>
+                        <ul>
+                            <li>Default compiler versions</li>
+                            <li>Gas reporting settings</li>
+                            <li>Debug mode preferences</li>
+                            <li>Network configurations</li>
+                            <li>Security analysis rules</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Configuration Settings</h3>
+                <p>Access settings via File → Preferences → Settings, then search for "blockchain":</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>settings.json</span>
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                    </div>
+                    <pre><code>{
+  "blockchain.defaultNetwork": "localhost",
+  "blockchain.enableGasReporting": true,
+  "blockchain.autoCompile": false,
+  "blockchain.solcVersion": "0.8.19",
+  "blockchain.enableDebugMode": false,
+  "blockchain.evmDebug": {
+    "autoRefresh": true,
+    "maxStackItems": 50,
+    "enableGasAnalysis": true
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Framework Detection Section -->
+            <section id="framework-detection" class="feature-section">
+                <h2><i class="fas fa-radar"></i> Framework Detection</h2>
+                
+                <p>The extension supports multiple blockchain frameworks and automatically detects which ones are present in your workspace.</p>
+
+                <div class="detection-grid">
+                    <div class="detection-item">
+                        <div class="framework-logo">
+                            <img src="../assets/hardhat-logo.png" alt="Hardhat">
+                        </div>
+                        <h4>Hardhat</h4>
+                        <p>Detects via:</p>
+                        <ul>
+                            <li><code>hardhat.config.js</code></li>
+                            <li><code>hardhat.config.ts</code></li>
+                            <li>hardhat in dependencies</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detection-item">
+                        <div class="framework-logo">
+                            <img src="../assets/truffle-logo.png" alt="Truffle">
+                        </div>
+                        <h4>Truffle</h4>
+                        <p>Detects via:</p>
+                        <ul>
+                            <li><code>truffle-config.js</code></li>
+                            <li><code>truffle.js</code></li>
+                            <li>truffle in dependencies</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detection-item">
+                        <div class="framework-logo">
+                            <img src="../assets/foundry-logo.png" alt="Foundry">
+                        </div>
+                        <h4>Foundry</h4>
+                        <p>Detects via:</p>
+                        <ul>
+                            <li><code>foundry.toml</code></li>
+                            <li><code>lib/</code> directory</li>
+                            <li>forge/cast binaries</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="detection-item">
+                        <div class="framework-logo">
+                            <img src="../assets/solana-logo.png" alt="Solana">
+                        </div>
+                        <h4>Solana/Anchor</h4>
+                        <p>Detects via:</p>
+                        <ul>
+                            <li><code>Anchor.toml</code></li>
+                            <li><code>Cargo.toml</code></li>
+                            <li>programs/ directory</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout callout-tip">
+                    <div class="callout-icon"><i class="fas fa-info-circle"></i></div>
+                    <div class="callout-content">
+                        <h4>Multiple Frameworks</h4>
+                        <p>The extension can handle projects with multiple frameworks. Use <code>Ctrl+Shift+P → Blockchain: Select Framework</code> to switch between detected frameworks.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Creating Project Section -->
+            <section id="creating-project" class="feature-section">
+                <h2><i class="fas fa-plus-circle"></i> Creating Your First Project</h2>
+                
+                <div class="project-tabs">
+                    <div class="tab-header">
+                        <button class="tab-btn active" data-tab="hardhat">Hardhat</button>
+                        <button class="tab-btn" data-tab="truffle">Truffle</button>
+                        <button class="tab-btn" data-tab="foundry">Foundry</button>
+                        <button class="tab-btn" data-tab="solana">Solana</button>
+                    </div>
+
+                    <!-- Hardhat Tab -->
+                    <div class="tab-content active" id="hardhat">
+                        <h3>Create a Hardhat Project</h3>
+                        <div class="step-container">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Initialize Project</h4>
+                                    <div class="code-block">
+                                        <pre><code>mkdir my-hardhat-project
+cd my-hardhat-project
+npx hardhat init</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Open in VS Code</h4>
+                                    <div class="code-block">
+                                        <pre><code>code .</code></pre>
+                                    </div>
+                                    <p>The extension will automatically detect the Hardhat configuration and activate.</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <h4>Verify Setup</h4>
+                                    <p>Check that you see:</p>
+                                    <ul>
+                                        <li>"Hardhat" in the status bar</li>
+                                        <li>Blockchain Toolkit panel in the sidebar</li>
+                                        <li>Hardhat commands in Command Palette</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Truffle Tab -->
+                    <div class="tab-content" id="truffle">
+                        <h3>Create a Truffle Project</h3>
+                        <div class="step-container">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Initialize Project</h4>
+                                    <div class="code-block">
+                                        <pre><code>mkdir my-truffle-project
+cd my-truffle-project
+npx truffle init</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Open in VS Code</h4>
+                                    <div class="code-block">
+                                        <pre><code>code .</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Foundry Tab -->
+                    <div class="tab-content" id="foundry">
+                        <h3>Create a Foundry Project</h3>
+                        <div class="step-container">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Install Foundry</h4>
+                                    <div class="code-block">
+                                        <pre><code>curl -L https://foundry.paradigm.xyz | bash
+foundryup</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Initialize Project</h4>
+                                    <div class="code-block">
+                                        <pre><code>forge init my-foundry-project
+cd my-foundry-project</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Solana Tab -->
+                    <div class="tab-content" id="solana">
+                        <h3>Create a Solana/Anchor Project</h3>
+                        <div class="step-container">
+                            <div class="step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <h4>Install Anchor</h4>
+                                    <div class="code-block">
+                                        <pre><code>cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+avm install latest
+avm use latest</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <h4>Initialize Project</h4>
+                                    <div class="code-block">
+                                        <pre><code>anchor init my-solana-project</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Basic Workflow Section -->
+            <section id="basic-workflow" class="feature-section">
+                <h2><i class="fas fa-code-branch"></i> Basic Development Workflow</h2>
+                
+                <div class="workflow-container">
+                    <div class="workflow-step">
+                        <div class="workflow-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <div class="workflow-content">
+                            <h3>1. Write Contracts</h3>
+                            <p>Create or edit your smart contracts in the <code>contracts/</code> directory. The extension provides:</p>
+                            <ul>
+                                <li>Solidity syntax highlighting</li>
+                                <li>Code snippets</li>
+                                <li>Auto-completion</li>
+                                <li>Error highlighting</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-icon">
+                            <i class="fas fa-hammer"></i>
+                        </div>
+                        <div class="workflow-content">
+                            <h3>2. Compile Contracts</h3>
+                            <p>Use the command palette or click the compile button:</p>
+                            <div class="code-block">
+                                <pre><code>Ctrl+Shift+P → Blockchain: Compile</code></pre>
+                            </div>
+                            <p>Or use the keyboard shortcut: <kbd>Ctrl+Shift+B</kbd></p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-icon">
+                            <i class="fas fa-flask"></i>
+                        </div>
+                        <div class="workflow-content">
+                            <h3>3. Write Tests</h3>
+                            <p>Create test files in the <code>test/</code> directory. The extension supports:</p>
+                            <ul>
+                                <li>JavaScript/TypeScript tests</li>
+                                <li>Solidity tests (Foundry)</li>
+                                <li>Test debugging</li>
+                                <li>Coverage analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <div class="workflow-content">
+                            <h3>4. Run Tests</h3>
+                            <p>Execute your test suite:</p>
+                            <div class="code-block">
+                                <pre><code>Ctrl+Shift+P → Blockchain: Test</code></pre>
+                            </div>
+                            <p>View results in the integrated terminal and output panel.</p>
+                        </div>
+                    </div>
+
+                    <div class="workflow-step">
+                        <div class="workflow-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="workflow-content">
+                            <h3>5. Deploy Contracts</h3>
+                            <p>Deploy to local or remote networks:</p>
+                            <div class="code-block">
+                                <pre><code>Ctrl+Shift+P → Blockchain: Select Network
+Ctrl+Shift+P → Blockchain: Deploy</code></pre>
+                            </div>
+                            <p>Monitor deployment progress and results in real-time.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Steps Section -->
+            <section id="next-steps" class="feature-section">
+                <h2><i class="fas fa-arrow-right"></i> Next Steps</h2>
+                
+                <div class="next-steps-grid">
+                    <a href="compilation.html" class="next-step-card">
+                        <div class="card-icon"><i class="fas fa-cogs"></i></div>
+                        <h3>Smart Contract Compilation</h3>
+                        <p>Learn advanced compilation features, optimization settings, and multi-framework support.</p>
+                    </a>
+                    
+                    <a href="testing.html" class="next-step-card">
+                        <div class="card-icon"><i class="fas fa-vial"></i></div>
+                        <h3>Testing & Coverage</h3>
+                        <p>Explore comprehensive testing capabilities, coverage analysis, and gas optimization.</p>
+                    </a>
+                    
+                    <a href="debugging.html" class="next-step-card">
+                        <div class="card-icon"><i class="fas fa-bug"></i></div>
+                        <h3>Advanced Debugging</h3>
+                        <p>Master EVM debugging, transaction analysis, and state inspection tools.</p>
+                    </a>
+                    
+                    <a href="networks.html" class="next-step-card">
+                        <div class="card-icon"><i class="fas fa-network-wired"></i></div>
+                        <h3>Network Management</h3>
+                        <p>Configure networks, manage connections, and deploy to multiple chains.</p>
+                    </a>
+                    
+                    <a href="security.html" class="next-step-card">
+                        <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                        <h3>Security Analysis</h3>
+                        <p>Implement security best practices and automated vulnerability detection.</p>
+                    </a>
+                    
+                    <a href="../docs.html" class="next-step-card">
+                        <div class="card-icon"><i class="fas fa-book"></i></div>
+                        <h3>Full Documentation</h3>
+                        <p>Access the complete documentation with API references and examples.</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../js/feature-page.js"></script>
+</body>
+</html>
