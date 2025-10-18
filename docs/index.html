@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Toolkit - VS Code Extension for Web3 Development</title>
+    <meta name="description" content="Comprehensive VS Code extension for blockchain development supporting Hardhat, Truffle, Foundry, Solana with advanced debugging, testing, and deployment features.">
+    <meta name="keywords" content="blockchain, ethereum, solidity, hardhat, truffle, foundry, solana, vs code, extension, web3, smart contracts">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="assets/logo.png" alt="Blockchain Toolkit" class="logo">
+                <span class="brand-text">Blockchain Toolkit</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#features" class="nav-link">Features</a></li>
+                <li><a href="#frameworks" class="nav-link">Frameworks</a></li>
+                <li><a href="#documentation" class="nav-link">Docs</a></li>
+                <li><a href="#examples" class="nav-link">Examples</a></li>
+                <li><a href="#community" class="nav-link">Community</a></li>
+                <li><a href="https://github.com/me-saurabhkohli/blockchain-toolkit" class="nav-link github-link">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Web3 development environment 
+                    <span class="gradient-text">for professionals</span>
+                </h1>
+                <p class="hero-description">
+                    A comprehensive VS Code extension supporting multiple blockchain frameworks. 
+                    Build, test, debug, and deploy smart contracts with advanced tooling for 
+                    Hardhat, Truffle, Foundry, Solana, and more.
+                </p>
+                <div class="hero-actions">
+                    <a href="https://marketplace.visualstudio.com/items?itemName=blockchain-toolkit" class="btn btn-primary">
+                        <i class="fas fa-download"></i>
+                        Install Extension
+                    </a>
+                    <a href="#features" class="btn btn-secondary">
+                        <i class="fas fa-play"></i>
+                        Learn More
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">8+</span>
+                        <span class="stat-label">Frameworks</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">Commands</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Networks</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="code-preview">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <span class="code-title">VS Code - Blockchain Toolkit</span>
+                    </div>
+                    <div class="code-content">
+                        <div class="code-line">
+                            <span class="line-number">1</span>
+                            <span class="code-text">
+                                <span class="keyword">pragma</span> 
+                                <span class="string">solidity</span> 
+                                <span class="operator">^</span>
+                                <span class="number">0.8.19</span>;
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">2</span>
+                            <span class="code-text"></span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">3</span>
+                            <span class="code-text">
+                                <span class="keyword">contract</span> 
+                                <span class="class">MyContract</span> {
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">4</span>
+                            <span class="code-text">
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">function</span> 
+                                <span class="function">deploy</span>() 
+                                <span class="keyword">public</span> {
+                            </span>
+                        </div>
+                        <div class="code-line active">
+                            <span class="line-number">5</span>
+                            <span class="code-text">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Breakpoint active</span>
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">6</span>
+                            <span class="code-text">
+                                &nbsp;&nbsp;&nbsp;&nbsp;}
+                            </span>
+                        </div>
+                        <div class="code-line">
+                            <span class="line-number">7</span>
+                            <span class="code-text">}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ready to use out of the box -->
+    <section class="ready-section">
+        <div class="container">
+            <h2 class="section-title">Ready to use out of the box</h2>
+            <p class="section-description">
+                Blockchain Toolkit includes everything you need for multi-framework blockchain development.
+                Debugging, testing, deployment, documentation generation, and more.
+            </p>
+            <div class="terminal-preview">
+                <div class="terminal-header">
+                    <div class="terminal-controls">
+                        <span class="terminal-dot red"></span>
+                        <span class="terminal-dot yellow"></span>
+                        <span class="terminal-dot green"></span>
+                    </div>
+                    <span class="terminal-title">Terminal</span>
+                </div>
+                <div class="terminal-body">
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-command">blockchain compile</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">✅ Compiled 5 contracts successfully</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-command">blockchain test</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">✅ 15 tests passed</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-prompt">$</span>
+                        <span class="terminal-command">blockchain deploy --network goerli</span>
+                    </div>
+                    <div class="terminal-line">
+                        <span class="terminal-output">🚀 Deployed to 0x742d35Cc6632C0532925a3b8D24140A582e2cD83</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Blockchain Toolkit?</h2>
+            <div class="features-grid">
+                <!-- Advanced EVM Debugging -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3 class="feature-title">Advanced EVM Debugging</h3>
+                    <p class="feature-description">
+                        Step-through debugging with EVM state inspection, memory analysis, 
+                        stack visualization, and gas usage tracking across all frameworks.
+                    </p>
+                    <a href="#debugging" class="feature-link">Learn more about debugging <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Multi-Framework Support -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="feature-title">Multi-Framework Support</h3>
+                    <p class="feature-description">
+                        Unified interface supporting Hardhat, Truffle, Foundry, Solana/Anchor 
+                        with automatic detection and seamless framework switching.
+                    </p>
+                    <a href="#frameworks" class="feature-link">Learn more about frameworks <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Documentation Generation -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 class="feature-title">Documentation Generation</h3>
+                    <p class="feature-description">
+                        Automated HTML documentation with deployment to GitHub Pages, Netlify, 
+                        Vercel, and AWS S3. Includes coverage reports and API references.
+                    </p>
+                    <a href="#documentation" class="feature-link">Learn more about docs <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- CI/CD Integration -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-infinity"></i>
+                    </div>
+                    <h3 class="feature-title">CI/CD Integration</h3>
+                    <p class="feature-description">
+                        Complete pipeline automation for GitHub Actions, GitLab CI, Jenkins, 
+                        CircleCI, and Azure DevOps with security scanning and deployment gates.
+                    </p>
+                    <a href="#cicd" class="feature-link">Learn more about CI/CD <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Contract Interaction -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="feature-title">Real-Time Contract Interaction</h3>
+                    <p class="feature-description">
+                        Monitor contracts in real-time, manage proxy contracts, watch events, 
+                        and execute batch operations with advanced ABI management.
+                    </p>
+                    <a href="#interaction" class="feature-link">Learn more about interaction <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Development Tools -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="feature-title">Comprehensive Dev Tools</h3>
+                    <p class="feature-description">
+                        Multi-network faucets, HD wallet generation, block explorer integration, 
+                        portfolio tracking, and account management tools.
+                    </p>
+                    <a href="#tools" class="feature-link">Learn more about tools <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Advanced Testing -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h3 class="feature-title">Advanced Testing Suite</h3>
+                    <p class="feature-description">
+                        Coverage analysis, gas optimization, fuzz testing, integration testing, 
+                        and security vulnerability scanning with detailed reporting.
+                    </p>
+                    <a href="#testing" class="feature-link">Learn more about testing <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Smart Contract Templates -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3 class="feature-title">Smart Contract Templates</h3>
+                    <p class="feature-description">
+                        Pre-built templates for ERC20/721/1155, DAO governance, DeFi protocols, 
+                        and gaming contracts with customizable features and parameters.
+                    </p>
+                    <a href="#templates" class="feature-link">Learn more about templates <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frameworks Section -->
+    <section id="frameworks" class="frameworks-section">
+        <div class="container">
+            <h2 class="section-title">Multi-chain ready: Support for all major frameworks</h2>
+            <p class="section-description">
+                Manage multiple frameworks simultaneously and confidently deploy across 
+                different blockchain ecosystems with unified tooling.
+            </p>
+            <div class="frameworks-grid">
+                <div class="framework-card">
+                    <div class="framework-icon">
+                        <img src="assets/hardhat-logo.png" alt="Hardhat">
+                    </div>
+                    <h3 class="framework-name">Hardhat</h3>
+                    <p class="framework-description">
+                        Complete Ethereum development environment with built-in testing, 
+                        debugging, and deployment capabilities.
+                    </p>
+                    <div class="framework-features">
+                        <span class="feature-tag">Local Network</span>
+                        <span class="feature-tag">TypeScript</span>
+                        <span class="feature-tag">Plugins</span>
+                    </div>
+                </div>
+
+                <div class="framework-card">
+                    <div class="framework-icon">
+                        <img src="assets/foundry-logo.png" alt="Foundry">
+                    </div>
+                    <h3 class="framework-name">Foundry</h3>
+                    <p class="framework-description">
+                        Fast and portable Ethereum testing framework written in Rust 
+                        for high-performance development.
+                    </p>
+                    <div class="framework-features">
+                        <span class="feature-tag">Rust-Powered</span>
+                        <span class="feature-tag">Solidity Tests</span>
+                        <span class="feature-tag">Fuzzing</span>
+                    </div>
+                </div>
+
+                <div class="framework-card">
+                    <div class="framework-icon">
+                        <img src="assets/truffle-logo.png" alt="Truffle">
+                    </div>
+                    <h3 class="framework-name">Truffle</h3>
+                    <p class="framework-description">
+                        Classic smart contract development framework with migration 
+                        system and comprehensive testing suite.
+                    </p>
+                    <div class="framework-features">
+                        <span class="feature-tag">Migrations</span>
+                        <span class="feature-tag">Debugger</span>
+                        <span class="feature-tag">Networks</span>
+                    </div>
+                </div>
+
+                <div class="framework-card">
+                    <div class="framework-icon">
+                        <img src="assets/solana-logo.png" alt="Solana">
+                    </div>
+                    <h3 class="framework-name">Solana/Anchor</h3>
+                    <p class="framework-description">
+                        High-performance blockchain with Rust-based smart contracts 
+                        and comprehensive development tooling.
+                    </p>
+                    <div class="framework-features">
+                        <span class="feature-tag">Anchor Framework</span>
+                        <span class="feature-tag">Rust Programs</span>
+                        <span class="feature-tag">High TPS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section id="documentation" class="docs-section">
+        <div class="container">
+            <h2 class="section-title">Comprehensive documentation and deployment</h2>
+            <div class="docs-grid">
+                <div class="docs-content">
+                    <h3 class="docs-subtitle">Automated Documentation Generation</h3>
+                    <p class="docs-description">
+                        Generate beautiful, comprehensive documentation automatically from your smart contracts, 
+                        tests, and project structure. Deploy to multiple platforms with a single command.
+                    </p>
+                    <ul class="docs-features">
+                        <li><i class="fas fa-check"></i> HTML documentation with custom themes</li>
+                        <li><i class="fas fa-check"></i> API reference generation</li>
+                        <li><i class="fas fa-check"></i> Test coverage visualization</li>
+                        <li><i class="fas fa-check"></i> Multi-platform deployment</li>
+                        <li><i class="fas fa-check"></i> Live preview server</li>
+                    </ul>
+                    <div class="docs-platforms">
+                        <span class="platform-tag">
+                            <i class="fab fa-github"></i>
+                            GitHub Pages
+                        </span>
+                        <span class="platform-tag">
+                            <i class="fas fa-globe"></i>
+                            Netlify
+                        </span>
+                        <span class="platform-tag">
+                            <i class="fas fa-cloud"></i>
+                            Vercel
+                        </span>
+                        <span class="platform-tag">
+                            <i class="fab fa-aws"></i>
+                            AWS S3
+                        </span>
+                    </div>
+                </div>
+                <div class="docs-visual">
+                    <div class="docs-preview">
+                        <div class="docs-browser">
+                            <div class="browser-header">
+                                <div class="browser-controls">
+                                    <span class="browser-dot"></span>
+                                    <span class="browser-dot"></span>
+                                    <span class="browser-dot"></span>
+                                </div>
+                                <div class="address-bar">
+                                    <span>https://your-project.github.io/docs</span>
+                                </div>
+                            </div>
+                            <div class="browser-content">
+                                <div class="docs-nav">
+                                    <div class="nav-item active">Getting Started</div>
+                                    <div class="nav-item">API Reference</div>
+                                    <div class="nav-item">Examples</div>
+                                    <div class="nav-item">Coverage Report</div>
+                                </div>
+                                <div class="docs-main">
+                                    <h1>MyContract Documentation</h1>
+                                    <p>Comprehensive documentation for your smart contract...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Getting Started Section -->
+    <section class="getting-started-section">
+        <div class="container">
+            <h2 class="section-title">Get started in minutes</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Install Extension</h3>
+                    <p class="step-description">
+                        Install Blockchain Toolkit from VS Code Marketplace or search for "Blockchain Toolkit" in the extensions panel.
+                    </p>
+                    <div class="step-code">
+                        <code>ext install blockchain-toolkit</code>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Open Project</h3>
+                    <p class="step-description">
+                        Open an existing blockchain project or create a new one. The extension automatically detects your framework configuration.
+                    </p>
+                    <div class="step-code">
+                        <code>code my-blockchain-project</code>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Start Building</h3>
+                    <p class="step-description">
+                        Use the command palette or sidebar to compile, test, debug, and deploy your smart contracts across multiple networks.
+                    </p>
+                    <div class="step-code">
+                        <code>Ctrl+Shift+P → Blockchain: Compile</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section id="community" class="community-section">
+        <div class="container">
+            <h2 class="section-title">Join the community</h2>
+            <p class="section-description">
+                Connect with blockchain developers worldwide and stay updated with the latest features and best practices.
+            </p>
+            <div class="community-links">
+                <a href="https://github.com/me-saurabhkohli/blockchain-toolkit" class="community-link">
+                    <i class="fab fa-github"></i>
+                    <div class="link-content">
+                        <h3>GitHub</h3>
+                        <p>Source code, issues, and contributions</p>
+                    </div>
+                </a>
+                <a href="https://discord.gg/blockchain-toolkit" class="community-link">
+                    <i class="fab fa-discord"></i>
+                    <div class="link-content">
+                        <h3>Discord</h3>
+                        <p>Real-time community chat and support</p>
+                    </div>
+                </a>
+                <a href="https://twitter.com/blockchain_toolkit" class="community-link">
+                    <i class="fab fa-twitter"></i>
+                    <div class="link-content">
+                        <h3>Twitter</h3>
+                        <p>Latest updates and announcements</p>
+                    </div>
+                </a>
+                <a href="https://blockchain-toolkit.dev/docs" class="community-link">
+                    <i class="fas fa-book"></i>
+                    <div class="link-content">
+                        <h3>Documentation</h3>
+                        <p>Comprehensive guides and tutorials</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2 class="newsletter-title">Stay updated with new features</h2>
+                <p class="newsletter-description">
+                    Get notified about new releases, features, and blockchain development best practices.
+                </p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" class="newsletter-input">
+                    <button type="submit" class="newsletter-button">Subscribe</button>
+                </form>
+                <p class="newsletter-privacy">
+                    We respect your privacy. Unsubscribe at any time.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <img src="assets/logo.png" alt="Blockchain Toolkit" class="footer-logo">
+                        <span class="footer-brand-text">Blockchain Toolkit</span>
+                    </div>
+                    <p class="footer-description">
+                        A comprehensive VS Code extension for professional blockchain development 
+                        across multiple frameworks and networks.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/me-saurabhkohli/blockchain-toolkit" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://twitter.com/blockchain_toolkit" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://discord.gg/blockchain-toolkit" class="social-link">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#frameworks">Frameworks</a></li>
+                        <li><a href="https://blockchain-toolkit.dev/docs">Documentation</a></li>
+                        <li><a href="https://marketplace.visualstudio.com/items?itemName=blockchain-toolkit">Download</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#examples">Examples</a></li>
+                        <li><a href="https://blockchain-toolkit.dev/tutorials">Tutorials</a></li>
+                        <li><a href="https://blockchain-toolkit.dev/api">API Reference</a></li>
+                        <li><a href="https://github.com/blockchain-toolkit/examples">Sample Projects</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3 class="footer-heading">Community</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://github.com/me-saurabhkohli/blockchain-toolkit/discussions">Discussions</a></li>
+                        <li><a href="https://github.com/me-saurabhkohli/blockchain-toolkit/issues">Report Issues</a></li>
+                        <li><a href="#community">Join Discord</a></li>
+                        <li><a href="https://blockchain-toolkit.dev/contributing">Contributing</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2025 <a href="https://github.com/me-saurabhkohli">Saurabh Kohli</a>. MIT License.</p>
+                </div>
+                <div class="footer-built-by">
+                    <p>Built by <a href="https://github.com/me-saurabhkohli">Saurabh Kohli</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
