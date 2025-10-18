@@ -1,39 +1,22 @@
----
+# GitHub Pages Configuration for Blockchain Toolkit
+
+# Basic site information
 title: "Blockchain Toolkit - VS Code Extension"
 description: "Professional blockchain development environment for VS Code supporting Hardhat, Truffle, Foundry, Solana with advanced debugging and testing capabilities"
-permalink: /
-layout: default
----
 
-# GitHub Pages Configuration
+# URL settings
+url: "https://me-saurabhkohli.github.io"
+baseurl: "/blockchain-toolkit"
 
-This file configures the Jekyll settings for the GitHub Pages deployment.
+# Build settings - disable Jekyll processing for plain HTML site
+plugins: []
+markdown: kramdown
+highlighter: rouge
 
-## Site Configuration
-
-- **Title**: Blockchain Toolkit - VS Code Extension
-- **Description**: Comprehensive blockchain development environment
-- **URL**: https://me-saurabhkohli.github.io/blockchain-toolkit
-- **Theme**: Custom (Hardhat-inspired)
-
-## Features
-
-- Custom HTML/CSS/JS (no Jekyll dependencies)
-- Optimized for GitHub Pages deployment
-- SEO-friendly structure
-- Mobile-responsive design
-- Fast loading performance
-
-## Deployment
-
-GitHub Pages will automatically build and deploy this site when:
-1. Changes are pushed to the main branch
-2. Files are updated in the `/docs` folder
-3. GitHub Pages is enabled in repository settings
-
-## Custom Domain (Optional)
-
-To use a custom domain:
-1. Add a `CNAME` file with your domain
-2. Configure DNS settings
-3. Enable HTTPS in GitHub Pages settings
+# Exclude files from processing
+exclude:
+  - README.md
+  - LICENSE
+  - node_modules/
+  - .git/
+  - .gitignore
