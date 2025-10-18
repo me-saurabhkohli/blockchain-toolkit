@@ -1,0 +1,1332 @@
+{
+  "name": "blockchain-toolkit",
+  "displayName": "Blockchain Toolkit",
+  "description": "Comprehensive VS Code extension for blockchain development supporting Hardhat, Truffle, Ethers.js, Web3.js, Hyperledger Fabric, and Solana with smart contract development, testing, deployment, and debugging features.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Saurabh Kohli",
+    "email": "me.saurabhkohli@gmail.com",
+    "url": "https://github.com/me-saurabhkohli"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Debuggers",
+    "Other"
+  ],
+  "keywords": [
+    "blockchain",
+    "ethereum",
+    "solidity",
+    "hardhat",
+    "truffle",
+    "ethers",
+    "web3",
+    "solana",
+    "hyperledger",
+    "fabric",
+    "smart-contracts",
+    "dapp",
+    "defi",
+    "nft",
+    "debugging"
+  ],
+  "activationEvents": [
+    "workspaceContains:hardhat.config.js",
+    "workspaceContains:hardhat.config.ts",
+    "workspaceContains:truffle-config.js",
+    "workspaceContains:truffle.js",
+    "workspaceContains:package.json",
+    "workspaceContains:Cargo.toml",
+    "workspaceContains:anchor.toml",
+    "workspaceContains:docker-compose.yml",
+    "onLanguage:solidity",
+    "onLanguage:rust",
+    "onLanguage:javascript",
+    "onLanguage:typescript"
+  ],
+  "main": "./out/extension.js",
+  "icon": "assets/icon.png",
+  "contributes": {
+    "commands": [
+      {
+        "command": "blockchain.hardhat.compile",
+        "title": "Compile Contracts (Hardhat)",
+        "category": "Blockchain",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "blockchain.hardhat.test",
+        "title": "Run Tests (Hardhat)",
+        "category": "Blockchain",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "blockchain.hardhat.deploy",
+        "title": "Deploy Contracts (Hardhat)",
+        "category": "Blockchain",
+        "icon": "$(cloud-upload)"
+      },
+      {
+        "command": "blockchain.hardhat.clean",
+        "title": "Clean (Hardhat)",
+        "category": "Blockchain",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "blockchain.node",
+        "title": "Start Local Node",
+        "category": "Blockchain",
+        "icon": "$(server-process)"
+      },
+      {
+        "command": "blockchain.console",
+        "title": "Open Console",
+        "category": "Blockchain",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "blockchain.init",
+        "title": "Initialize Project",
+        "category": "Blockchain",
+        "icon": "$(folder-opened)"
+      },
+      {
+        "command": "blockchain.verify",
+        "title": "Verify Contract",
+        "category": "Blockchain",
+        "icon": "$(verified)"
+      },
+      {
+        "command": "blockchain.coverage",
+        "title": "Test Coverage",
+        "category": "Blockchain",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "blockchain.hardhat.refresh",
+        "title": "Refresh (Hardhat)",
+        "category": "Blockchain",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blockchain.debug",
+        "title": "Debug Contract",
+        "category": "Blockchain",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "blockchain.debugTest",
+        "title": "Debug Test",
+        "category": "Blockchain",
+        "icon": "$(debug-alt)"
+      },
+      {
+        "command": "blockchain.network.select",
+        "title": "Select Network",
+        "category": "Blockchain Network",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "blockchain.network.add",
+        "title": "Add Network",
+        "category": "Blockchain Network",
+        "icon": "$(add)"
+      },
+      {
+        "command": "blockchain.network.edit",
+        "title": "Edit Network",
+        "category": "Blockchain Network",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "blockchain.network.remove",
+        "title": "Remove Network",
+        "category": "Blockchain Network",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "blockchain.network.checkStatus",
+        "title": "Check Network Status",
+        "category": "Blockchain Network",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "blockchain.network.refresh",
+        "title": "Refresh Networks",
+        "category": "Blockchain Network",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blockchain.services.authenticateInfura",
+        "title": "Authenticate Infura",
+        "category": "Blockchain Services",
+        "icon": "$(key)"
+      },
+      {
+        "command": "blockchain.services.authenticateAlchemy",
+        "title": "Authenticate Alchemy",
+        "category": "Blockchain Services",
+        "icon": "$(key)"
+      },
+      {
+        "command": "blockchain.services.configureGasTracker",
+        "title": "Configure Gas Tracker",
+        "category": "Blockchain Services",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "blockchain.services.testConnection",
+        "title": "Test Connection",
+        "category": "Blockchain Services",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "blockchain.services.removeCredentials",
+        "title": "Remove Credentials",
+        "category": "Blockchain Services",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "blockchain.services.refresh",
+        "title": "Refresh Services",
+        "category": "Blockchain Services",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blockchain.showGasPrices",
+        "title": "Show Gas Prices",
+        "category": "Blockchain Services",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "blockchain.services.copyProviderUrl",
+        "title": "Copy Provider URL",
+        "category": "Blockchain Services",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "blockchain.services.switchProvider",
+        "title": "Switch RPC Provider",
+        "category": "Blockchain Services",
+        "icon": "$(arrow-swap)"
+      },
+      {
+        "command": "blockchain.services.manageProviders",
+        "title": "Manage Service Providers",
+        "category": "Blockchain Services",
+        "icon": "$(settings)"
+      },
+      {
+        "command": "blockchain.debug.startEVMDebug",
+        "title": "Start EVM Debug Session",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "blockchain.debug.debugTransaction",
+        "title": "Debug Transaction",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(search)"
+      },
+      {
+        "command": "blockchain.debug.stepForward",
+        "title": "Step Forward",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-step-over)"
+      },
+      {
+        "command": "blockchain.debug.stepBackward",
+        "title": "Step Backward",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-step-back)"
+      },
+      {
+        "command": "blockchain.debug.showMemoryDump",
+        "title": "Show Memory Dump",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(database)"
+      },
+      {
+        "command": "blockchain.debug.showStackTrace",
+        "title": "Show Stack Trace",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(list-ordered)"
+      },
+      {
+        "command": "blockchain.debug.showStorageState",
+        "title": "Show Storage State",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(archive)"
+      },
+      {
+        "command": "blockchain.debug.exportEVMState",
+        "title": "Export EVM State",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(export)"
+      },
+      {
+        "command": "blockchain.debug.refreshEVMState",
+        "title": "Refresh EVM State",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blockchain.debug.analyzeGasUsage",
+        "title": "Analyze Gas Usage",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "blockchain.debug.findInMemory",
+        "title": "Find in Memory",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(find-in-files)"
+      },
+      {
+        "command": "blockchain.debug.copyStackItem",
+        "title": "Copy Stack Item",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "blockchain.debug.copyMemoryChunk",
+        "title": "Copy Memory Chunk",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "blockchain.debug.copyStorageItem",
+        "title": "Copy Storage Item",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "blockchain.security.runAnalysis",
+        "title": "Run Security Analysis",
+        "category": "Blockchain Security",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "blockchain.security.refresh",
+        "title": "Refresh Security Analysis",
+        "category": "Blockchain Security",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blockchain.security.configure",
+        "title": "Configure Security Detectors",
+        "category": "Blockchain Security",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "blockchain.security.showOutput",
+        "title": "Show Security Output",
+        "category": "Blockchain Security",
+        "icon": "$(output)"
+      },
+      {
+        "command": "blockchain.compile",
+        "title": "Compile",
+        "category": "Blockchain",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "blockchain.test",
+        "title": "Test",
+        "category": "Blockchain",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "blockchain.deploy",
+        "title": "Deploy",
+        "category": "Blockchain",
+        "icon": "$(cloud-upload)"
+      },
+      {
+        "command": "blockchain.build",
+        "title": "Build",
+        "category": "Blockchain",
+        "icon": "$(package)"
+      },
+      {
+        "command": "blockchain.clean",
+        "title": "Clean",
+        "category": "Blockchain",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "blockchain.refresh",
+        "title": "Refresh",
+        "category": "Blockchain",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blockchain.validate",
+        "title": "Validate Commands",
+        "category": "Blockchain",
+        "icon": "$(check)"
+      },
+      {
+        "command": "blockchain.testFrameworkDetection",
+        "title": "Test Framework Detection",
+        "category": "Blockchain", 
+        "icon": "$(search)"
+      },
+      {
+        "command": "blockchain.selectFramework",
+        "title": "Select Framework",
+        "category": "Blockchain",
+        "icon": "$(list-selection)"
+      },
+      {
+        "command": "blockchain.initializeFramework",
+        "title": "Initialize Framework",
+        "category": "Blockchain",
+        "icon": "$(file-add)"
+      },
+      {
+        "command": "blockchain.showFrameworkInfo",
+        "title": "Show Framework Info",
+        "category": "Blockchain",
+        "icon": "$(info)"
+      },
+      {
+        "command": "blockchain.openDocumentation",
+        "title": "Open Documentation",
+        "category": "Blockchain",
+        "icon": "$(book)"
+      },
+      {
+        "command": "blockchain.service.status",
+        "title": "Service Status",
+        "category": "Blockchain Service",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "blockchain.service.start",
+        "title": "Start Service",
+        "category": "Blockchain Service",
+        "icon": "$(play)"
+      },
+      {
+        "command": "blockchain.service.stop",
+        "title": "Stop Service",
+        "category": "Blockchain Service",
+        "icon": "$(stop)"
+      },
+      {
+        "command": "blockchain.service.restart",
+        "title": "Restart Service",
+        "category": "Blockchain Service",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blockchain.service.logs",
+        "title": "View Service Logs",
+        "category": "Blockchain Service",
+        "icon": "$(output)"
+      },
+      {
+        "command": "blockchain.service.configure",
+        "title": "Configure Service",
+        "category": "Blockchain Service",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "blockchain.service.gasTracker.enable",
+        "title": "Enable Gas Tracker",
+        "category": "Blockchain Service",
+        "icon": "$(check)"
+      },
+      {
+        "command": "blockchain.service.gasTracker.disable",
+        "title": "Disable Gas Tracker",
+        "category": "Blockchain Service",
+        "icon": "$(x)"
+      },
+      {
+        "command": "blockchain.service.gasTracker.reset",
+        "title": "Reset Gas Tracker",
+        "category": "Blockchain Service",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "blockchain.service.gasTracker.export",
+        "title": "Export Gas Data",
+        "category": "Blockchain Service",
+        "icon": "$(export)"
+      },
+      {
+        "command": "blockchain.contract.call",
+        "title": "Call Contract Method",
+        "category": "Blockchain Contract",
+        "icon": "$(call-outgoing)"
+      },
+      {
+        "command": "blockchain.contract.send",
+        "title": "Send Transaction",
+        "category": "Blockchain Contract",
+        "icon": "$(send)"
+      },
+      {
+        "command": "blockchain.contract.read",
+        "title": "Read Contract State",
+        "category": "Blockchain Contract",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "blockchain.contract.events",
+        "title": "Watch Contract Events",
+        "category": "Blockchain Contract",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "blockchain.template.erc20",
+        "title": "Generate ERC20 Token",
+        "category": "Blockchain Templates",
+        "icon": "$(symbol-currency)"
+      },
+      {
+        "command": "blockchain.template.erc721",
+        "title": "Generate ERC721 NFT",
+        "category": "Blockchain Templates",
+        "icon": "$(symbol-property)"
+      },
+      {
+        "command": "blockchain.template.dao",
+        "title": "Generate DAO Contract",
+        "category": "Blockchain Templates",
+        "icon": "$(organization)"
+      },
+      {
+        "command": "blockchain.truffle.compile",
+        "title": "Truffle Compile",
+        "category": "Blockchain Truffle",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "blockchain.truffle.test",
+        "title": "Truffle Test",
+        "category": "Blockchain Truffle",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "blockchain.truffle.migrate",
+        "title": "Truffle Migrate",
+        "category": "Blockchain Truffle",
+        "icon": "$(rocket)"
+      },
+      {
+        "command": "blockchain.truffle.console",
+        "title": "Truffle Console",
+        "category": "Blockchain Truffle",
+        "icon": "$(terminal)"
+      },
+      {
+        "command": "blockchain.truffle.develop",
+        "title": "Truffle Develop",
+        "category": "Blockchain Truffle",
+        "icon": "$(code)"
+      },
+      {
+        "command": "blockchain.foundry.build",
+        "title": "Foundry Build",
+        "category": "Blockchain Foundry",
+        "icon": "$(gear)"
+      },
+      {
+        "command": "blockchain.foundry.test",
+        "title": "Foundry Test",
+        "category": "Blockchain Foundry",
+        "icon": "$(beaker)"
+      },
+      {
+        "command": "blockchain.foundry.forge",
+        "title": "Foundry Forge",
+        "category": "Blockchain Foundry",
+        "icon": "$(tools)"
+      },
+      {
+        "command": "blockchain.foundry.cast",
+        "title": "Foundry Cast",
+        "category": "Blockchain Foundry",
+        "icon": "$(broadcast)"
+      },
+      {
+        "command": "blockchain.foundry.anvil",
+        "title": "Foundry Anvil",
+        "category": "Blockchain Foundry",
+        "icon": "$(server)"
+      },
+      {
+        "command": "blockchain.evm.debug.start",
+        "title": "Start EVM Debug",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-start)"
+      },
+      {
+        "command": "blockchain.evm.debug.step",
+        "title": "Debug Step",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-step-over)"
+      },
+      {
+        "command": "blockchain.evm.debug.stepOver",
+        "title": "Debug Step Over",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-step-over)"
+      },
+      {
+        "command": "blockchain.evm.debug.stepInto",
+        "title": "Debug Step Into",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-step-into)"
+      },
+      {
+        "command": "blockchain.evm.debug.stepOut",
+        "title": "Debug Step Out",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-step-out)"
+      },
+      {
+        "command": "blockchain.evm.debug.continue",
+        "title": "Debug Continue",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-continue)"
+      },
+      {
+        "command": "blockchain.evm.debug.stop",
+        "title": "Stop Debug",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "blockchain.evm.debug.inspect",
+        "title": "Inspect State",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(inspect)"
+      },
+      {
+        "command": "blockchain.evm.debug.breakpoint",
+        "title": "Toggle Breakpoint",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(debug-breakpoint)"
+      },
+      {
+        "command": "blockchain.evm.debug.watch",
+        "title": "Add Watch",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(eye)"
+      },
+      {
+        "command": "blockchain.evm.debug.stack",
+        "title": "View Stack",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(list-ordered)"
+      },
+      {
+        "command": "blockchain.evm.debug.memory",
+        "title": "View Memory",
+        "category": "Blockchain EVM Debug",
+        "icon": "$(database)"
+      },
+      {
+        "command": "blockchain.security.analyze",
+        "title": "Analyze Security",
+        "category": "Blockchain Security",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "blockchain.security.report",
+        "title": "Security Report",
+        "category": "Blockchain Security",
+        "icon": "$(file-text)"
+      },
+      {
+        "command": "blockchain.security.configure",
+        "title": "Configure Security",
+        "category": "Blockchain Security", 
+        "icon": "$(gear)"
+      },
+      {
+        "command": "blockchain.security.scan",
+        "title": "Security Scan",
+        "category": "Blockchain Security",
+        "icon": "$(search)"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "blockchainExplorer",
+          "name": "Blockchain Toolkit",
+          "when": "blockchain:hasFrameworks"
+        }
+      ],
+      "blockchain": [
+        {
+          "id": "blockchainNetworks",
+          "name": "Networks",
+          "when": "blockchain:hasHardhat || blockchain:hasTruffle || blockchain:hasFoundry"
+        },
+        {
+          "id": "blockchainServices",
+          "name": "Service Integrations",
+          "when": "blockchain:hasHardhat || blockchain:hasTruffle || blockchain:hasFoundry"
+        },
+        {
+          "id": "blockchainEVMDebug",
+          "name": "EVM Debug State",
+          "when": "blockchain:hasHardhat || blockchain:hasTruffle || blockchain:hasFoundry"
+        },
+        {
+          "id": "blockchainSecurity",
+          "name": "Security Analysis",
+          "when": "blockchain:hasFrameworks"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "blockchain",
+          "title": "Blockchain Toolkit",
+          "icon": "$(tools)"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "blockchain.refresh",
+          "when": "view == blockchainExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "blockchain.network.add",
+          "when": "view == blockchainNetworks",
+          "group": "navigation@1"
+        },
+        {
+          "command": "blockchain.network.checkStatus",
+          "when": "view == blockchainNetworks",
+          "group": "navigation@2"
+        },
+        {
+          "command": "blockchain.network.refresh",
+          "when": "view == blockchainNetworks",
+          "group": "navigation@3"
+        },
+        {
+          "command": "blockchain.services.refresh",
+          "when": "view == blockchainServices",
+          "group": "navigation@1"
+        },
+        {
+          "command": "blockchain.services.manageProviders",
+          "when": "view == blockchainServices",
+          "group": "navigation@2"
+        },
+        {
+          "command": "blockchain.showGasPrices",
+          "when": "view == blockchainServices",
+          "group": "navigation@3"
+        },
+        {
+          "command": "blockchain.debug.startEVMDebug",
+          "when": "view == blockchainEVMDebug",
+          "group": "navigation@1"
+        },
+        {
+          "command": "blockchain.debug.debugTransaction",
+          "when": "view == blockchainEVMDebug",
+          "group": "navigation@2"
+        },
+        {
+          "command": "blockchain.debug.refreshEVMState",
+          "when": "view == blockchainEVMDebug",
+          "group": "navigation@3"
+        },
+        {
+          "command": "blockchain.security.runAnalysis",
+          "when": "view == blockchainSecurity",
+          "group": "navigation@1"
+        },
+        {
+          "command": "blockchain.security.configure",
+          "when": "view == blockchainSecurity", 
+          "group": "navigation@2"
+        },
+        {
+          "command": "blockchain.security.refresh",
+          "when": "view == blockchainSecurity",
+          "group": "navigation@3"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "blockchain.compile",
+          "when": "view == blockchainExplorer && viewItem == contract",
+          "group": "blockchain@1"
+        },
+        {
+          "command": "blockchain.deploy",
+          "when": "view == blockchainExplorer && viewItem == contract",
+          "group": "blockchain@2"
+        },
+        {
+          "command": "blockchain.network.select",
+          "when": "view == blockchainNetworks && viewItem == network",
+          "group": "network@1"
+        },
+        {
+          "command": "blockchain.network.edit",
+          "when": "view == blockchainNetworks && viewItem == network",
+          "group": "network@2"
+        },
+        {
+          "command": "blockchain.network.remove",
+          "when": "view == blockchainNetworks && viewItem == network",
+          "group": "network@3"
+        },
+        {
+          "command": "blockchain.network.checkStatus",
+          "when": "view == blockchainNetworks && viewItem == network",
+          "group": "network@4"
+        },
+        {
+          "command": "blockchain.services.testConnection",
+          "when": "view == blockchainServices && viewItem =~ /^provider-/",
+          "group": "service@1"
+        },
+        {
+          "command": "blockchain.services.copyProviderUrl",
+          "when": "view == blockchainServices && viewItem =~ /^provider-/",
+          "group": "service@2"
+        },
+        {
+          "command": "blockchain.services.removeCredentials",
+          "when": "view == blockchainServices && viewItem =~ /^provider-/",
+          "group": "service@3"
+        },
+        {
+          "command": "blockchain.debug.copyStackItem",
+          "when": "view == blockchainEVMDebug && viewItem == stack-item",
+          "group": "evm@1"
+        },
+        {
+          "command": "blockchain.debug.copyMemoryChunk",
+          "when": "view == blockchainEVMDebug && viewItem == memory-chunk",
+          "group": "evm@1"
+        },
+        {
+          "command": "blockchain.debug.copyStorageItem",
+          "when": "view == blockchainEVMDebug && viewItem == storage-item",
+          "group": "evm@1"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "blockchain.hardhat.compile",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.hardhat.test",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.hardhat.deploy",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.hardhat.clean",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.node",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.console",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.verify",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.coverage",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debugTest",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.network.select",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.network.add",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.network.edit",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.network.remove",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.network.checkStatus",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.network.refresh",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.services.authenticateInfura",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.services.authenticateAlchemy",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.services.configureGasTracker",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.services.manageProviders",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.services.switchProvider",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.showGasPrices",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.startEVMDebug",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.debugTransaction",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.stepForward",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.stepBackward",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.showMemoryDump",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.showStackTrace",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.showStorageState",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.exportEVMState",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.analyzeGasUsage",
+          "when": "blockchain:hasFrameworks"
+        },
+        {
+          "command": "blockchain.debug.findInMemory",
+          "when": "blockchain:hasFrameworks"
+        }
+      ]
+    },
+    "configuration": {
+      "type": "object",
+      "title": "Blockchain Toolkit",
+      "properties": {
+        "blockchain.configPath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to blockchain framework config file"
+        },
+        "blockchain.defaultNetwork": {
+          "type": "string",
+          "default": "localhost",
+          "description": "Default network for deployments"
+        },
+        "blockchain.enableGasReporting": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable gas reporting during tests"
+        },
+        "blockchain.solcVersion": {
+          "type": "string",
+          "default": "0.8.19",
+          "description": "Default Solidity compiler version"
+        },
+        "blockchain.enableDebugMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debug mode for enhanced logging"
+        },
+        "blockchain.autoCompile": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically compile contracts on file save"
+        },
+        "blockchain.gasTracker": {
+          "type": "object",
+          "description": "Gas tracker configuration",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "enum": [
+                "etherscan",
+                "owlracle",
+                "gasstation"
+              ],
+              "default": "etherscan",
+              "description": "Gas price provider"
+            },
+            "apiKey": {
+              "type": "string",
+              "description": "API key for gas tracker service"
+            },
+            "refreshInterval": {
+              "type": "number",
+              "default": 30,
+              "minimum": 10,
+              "description": "Refresh interval in seconds"
+            },
+            "networks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "mainnet",
+                "polygon"
+              ],
+              "description": "Networks to track gas prices for"
+            }
+          }
+        },
+        "blockchain.rpcUrl": {
+          "type": "string",
+          "default": "http://localhost:8545",
+          "description": "RPC URL for EVM debugging and network operations"
+        },
+        "blockchain.evmDebug": {
+          "type": "object",
+          "description": "EVM debugging configuration",
+          "properties": {
+            "autoRefresh": {
+              "type": "boolean",
+              "default": true,
+              "description": "Automatically refresh EVM state when stepping"
+            },
+            "maxStackItems": {
+              "type": "number",
+              "default": 50,
+              "description": "Maximum number of stack items to display"
+            },
+            "maxMemoryChunks": {
+              "type": "number", 
+              "default": 100,
+              "description": "Maximum number of memory chunks to display"
+            },
+            "showHexValues": {
+              "type": "boolean",
+              "default": true,
+              "description": "Show values in hexadecimal format"
+            },
+            "enableGasAnalysis": {
+              "type": "boolean",
+              "default": true,
+              "description": "Enable real-time gas usage analysis"
+            }
+          }
+        },
+        "blockchain.security": {
+          "type": "object",
+          "description": "Security analysis configuration",
+          "properties": {
+            "enabledDetectors": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "unchecked-return-value",
+                "reentrancy",
+                "access-control", 
+                "tx-origin",
+                "unused-variable"
+              ],
+              "description": "List of enabled security detectors"
+            },
+            "runOnSave": {
+              "type": "boolean",
+              "default": false,
+              "description": "Automatically run security analysis when Solidity files are saved"
+            },
+            "minSeverity": {
+              "type": "string",
+              "enum": ["high", "medium", "low", "info"],
+              "default": "medium",
+              "description": "Minimum severity level to display"
+            },
+            "excludePaths": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": ["node_modules/**", "test/**"],
+              "description": "Paths to exclude from security analysis"
+            }
+          }
+        }
+      }
+    },
+    "taskDefinitions": [
+      {
+        "type": "blockchain",
+        "required": [
+          "task"
+        ],
+        "properties": {
+          "task": {
+            "type": "string",
+            "description": "The blockchain task to execute"
+          },
+          "framework": {
+            "type": "string",
+            "description": "The blockchain framework to use",
+            "enum": ["hardhat", "truffle", "foundry", "solana"]
+          },
+          "args": {
+            "type": "array",
+            "description": "Additional arguments for the task"
+          }
+        }
+      }
+    ],
+    "problemMatchers": [
+      {
+        "name": "blockchain-solidity",
+        "owner": "blockchain",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+): (warning|error): (.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "solidity",
+        "path": "./snippets/solidity.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/hardhat.json"
+      },
+      {
+        "language": "typescript",
+        "path": "./snippets/hardhat.json"
+      },
+      {
+        "language": "rust",
+        "path": "./snippets/solana.json"
+      }
+    ],
+    "debuggers": [
+      {
+        "type": "blockchain",
+        "label": "Blockchain Debugger",
+        "languages": [
+          "solidity",
+          "javascript",
+          "typescript",
+          "rust"
+        ],
+        "configurationAttributes": {
+          "launch": {
+            "required": [],
+            "properties": {
+              "program": {
+                "type": "string",
+                "description": "Absolute path to the contract or test file to debug.",
+                "default": "${workspaceFolder}/contracts/Contract.sol"
+              },
+              "network": {
+                "type": "string",
+                "description": "Network to use for debugging",
+                "default": "localhost",
+                "enum": [
+                  "localhost",
+                  "hardhat",
+                  "mainnet",
+                  "goerli",
+                  "sepolia",
+                  "polygon",
+                  "arbitrum",
+                  "optimism"
+                ]
+              },
+              "framework": {
+                "type": "string",
+                "description": "Blockchain framework to use",
+                "default": "hardhat",
+                "enum": [
+                  "hardhat",
+                  "truffle",
+                  "foundry",
+                  "solana"
+                ]
+              },
+              "args": {
+                "type": "array",
+                "description": "Additional arguments to pass to Hardhat",
+                "default": []
+              },
+              "cwd": {
+                "type": "string",
+                "description": "Working directory",
+                "default": "${workspaceFolder}"
+              },
+              "console": {
+                "type": "string",
+                "enum": [
+                  "internalConsole",
+                  "integratedTerminal",
+                  "externalTerminal"
+                ],
+                "description": "Where to launch the debug target",
+                "default": "integratedTerminal"
+              },
+              "internalConsoleOptions": {
+                "type": "string",
+                "enum": [
+                  "neverOpen",
+                  "openOnSessionStart",
+                  "openOnFirstSessionStart"
+                ],
+                "description": "Controls when the internal console should open",
+                "default": "openOnFirstSessionStart"
+              },
+              "stopOnEntry": {
+                "type": "boolean",
+                "description": "Automatically stop after launch",
+                "default": false
+              },
+              "trace": {
+                "type": "boolean",
+                "description": "Enable logging of the Debug Adapter Protocol",
+                "default": false
+              }
+            }
+          }
+        },
+        "initialConfigurations": [
+          {
+            "name": "Debug Solidity Contract",
+            "request": "launch",
+            "type": "blockchain",
+            "program": "${workspaceFolder}/contracts/Contract.sol",
+            "framework": "hardhat",
+            "network": "localhost",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen"
+          }
+        ],
+        "configurationSnippets": [
+          {
+            "label": "Blockchain: Debug Contract",
+            "description": "A new configuration for debugging a Solidity contract",
+            "body": {
+              "name": "Debug Solidity Contract",
+              "request": "launch",
+              "type": "blockchain",
+              "program": "^\"\\${workspaceFolder}/contracts/\\${1:Contract.sol}\"",
+              "framework": "^\"\\${2:hardhat}\"",
+              "network": "^\"\\${3:localhost}\"",
+              "console": "integratedTerminal",
+              "internalConsoleOptions": "neverOpen"
+            }
+          },
+          {
+            "label": "Blockchain: Debug Test",
+            "description": "A new configuration for debugging a test file",
+            "body": {
+              "name": "Debug Test",
+              "request": "launch",
+              "type": "blockchain",
+              "program": "^\"\\${workspaceFolder}/test/\\${1:test.js}\"",
+              "framework": "^\"\\${2:hardhat}\"",
+              "network": "^\"\\${3:localhost}\"",
+              "console": "integratedTerminal",
+              "internalConsoleOptions": "neverOpen"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package",
+    "publish": "vsce publish"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^2.6.13",
+    "@vscode/debugadapter": "^1.68.0",
+    "@vscode/debugprotocol": "^1.68.0",
+    "fs-extra": "^11.1.1",
+    "glob": "^8.1.0",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.74.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "@vscode/test-electron": "^2.2.0",
+    "eslint": "^8.28.0",
+    "typescript": "^4.9.4",
+    "vsce": "^2.15.0"
+  }
+}
