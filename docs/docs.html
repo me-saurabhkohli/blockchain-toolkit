@@ -9,6 +9,10 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Prism.js for syntax highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
 </head>
 <body>
 
@@ -218,20 +222,31 @@ body {
   line-height: 1.6;
 }
 
-.code-block {
-  background: var(--bg-dark);
+/* Code blocks with syntax highlighting */
+.code-block,
+pre[class*="language-"] {
+  background: var(--bg-dark) !important;
   border: 1px solid var(--border-color);
   border-radius: 0.75rem;
   padding: 1.5rem;
   margin: 1.5rem 0;
-  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Consolas', monospace !important;
   font-size: 0.875rem;
   color: var(--text-primary);
   overflow-x: auto;
   position: relative;
+  line-height: 1.5;
 }
 
-.code-block::before {
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #f8f8f2 !important;
+  background: none !important;
+  text-shadow: none;
+}
+
+.code-block::before,
+pre[class*="language-"]::before {
   content: attr(data-language);
   position: absolute;
   top: 0.75rem;
@@ -242,6 +257,97 @@ body {
   border-radius: 0.25rem;
   font-size: 0.75rem;
   font-weight: 500;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+/* Syntax highlighting overrides */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6272a4 !important;
+}
+
+.token.punctuation {
+  color: #f8f8f2 !important;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #ff79c6 !important;
+}
+
+.token.boolean,
+.token.number {
+  color: #bd93f9 !important;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #50fa7b !important;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+  color: #f8f8f2 !important;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+  color: #f1fa8c !important;
+}
+
+.token.keyword {
+  color: #8be9fd !important;
+}
+
+.token.regex,
+.token.important {
+  color: #ffb86c !important;
+}
+
+/* Copy button for code blocks */
+.code-block-container {
+  position: relative;
+}
+
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: rgba(255, 240, 77, 0.1);
+  border: 1px solid rgba(255, 240, 77, 0.3);
+  color: var(--primary-color);
+  padding: 0.5rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 20;
+}
+
+.code-block-container:hover .copy-button {
+  opacity: 1;
+}
+
+.copy-button:hover {
+  background: rgba(255, 240, 77, 0.2);
+  border-color: rgba(255, 240, 77, 0.5);
 }
 
 .inline-code {
@@ -597,11 +703,13 @@ body {
       </p>
     </div>
 
-    <!-- Installation Section -->
+    <!-- Getting Started Section -->
     <section id="installation" class="docs-section">
-      <h2>🚀 Installation & Setup</h2>
+      <h2>🚀 Getting Started</h2>
       
-      <h3>Prerequisites</h3>
+      <h3>Installation & Setup</h3>
+      
+      <h4>Prerequisites</h4>
       <ul>
         <li><strong>VS Code</strong> version 1.74.0 or higher</li>
         <li><strong>Node.js</strong> version 16 or higher</li>
@@ -609,8 +717,11 @@ body {
         <li>At least one blockchain framework (Hardhat, Truffle, Foundry, etc.)</li>
       </ul>
 
-      <h3>Install from VS Code Marketplace</h3>
-      <div class="code-block" data-language="bash">ext install blockchain-toolkit</div>
+      <h4>Install from VS Code Marketplace</h4>
+      <div class="code-block-container">
+        <pre class="language-bash" data-language="bash"><code class="language-bash">ext install blockchain-toolkit</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
 
       <p>Or search for "Blockchain Toolkit" in the VS Code Extensions panel.</p>
 
@@ -618,13 +729,10 @@ body {
         <div class="callout-title">💡 Pro Tip</div>
         <p>The extension automatically detects blockchain frameworks in your workspace and configures itself accordingly.</p>
       </div>
-    </section>
 
-    <!-- Quick Start Section -->
-    <section id="quick-start" class="docs-section">
-      <h2>⚡ Quick Start Guide</h2>
+      <h3 id="quick-start">Quick Start Guide</h3>
       
-      <h3>For Existing Projects</h3>
+      <h4>For Existing Projects</h4>
       <ol>
         <li>Open your blockchain project in VS Code</li>
         <li>The extension automatically detects your framework configuration</li>
@@ -632,16 +740,19 @@ body {
         <li>Explore the Blockchain Toolkit sidebar for project navigation</li>
       </ol>
 
-      <h3>For New Projects</h3>
-      <div class="code-block" data-language="bash"># Create new Hardhat project
+      <h4>For New Projects</h4>
+      <div class="code-block-container">
+        <pre class="language-bash" data-language="bash"><code class="language-bash"># Create new Hardhat project
 mkdir my-blockchain-project
 cd my-blockchain-project
 npx hardhat init
 
 # Open in VS Code
-code .</div>
+code .</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
 
-      <h3>First Commands to Try</h3>
+      <h4>First Commands to Try</h4>
       <div class="command-list">
         <div class="command-item">
           <div class="command-name">Blockchain: Compile Contracts</div>
@@ -656,166 +767,81 @@ code .</div>
           <div class="command-description">Choose your target network for deployment</div>
         </div>
       </div>
+
+      <h3 id="first-project">Creating Your First Project</h3>
+      <p>Let's create a complete blockchain project from scratch:</p>
+      
+      <div class="code-block-container">
+        <pre class="language-bash" data-language="bash"><code class="language-bash"># Initialize a new Hardhat project
+npx hardhat init
+
+# Install additional dependencies
+npm install @openzeppelin/contracts
+
+# Open in VS Code
+code .</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
+
+      <p>Once opened, the Blockchain Toolkit will:</p>
+      <ul>
+        <li>Automatically detect your Hardhat configuration</li>
+        <li>Show the project structure in the sidebar</li>
+        <li>Enable blockchain-specific commands</li>
+        <li>Provide syntax highlighting for Solidity files</li>
+      </ul>
     </section>
 
-            <!-- Core Features Section -->
-            <section id="core-features" class="docs-section">
-                <h2>🛠️ Core Features</h2>
-                
-                <div class="feature-grid">
-                    <div class="feature-item">
-                        <h4>🔧 Multi-Framework Support</h4>
-                        <p>Unified interface for Hardhat, Truffle, Foundry, and Solana with automatic framework detection and seamless switching.</p>
-                        <a href="features/getting-started.html" class="feature-link">Learn More →</a>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <h4>🐛 Advanced Debugging</h4>
-                        <p>Step-through debugging with EVM state inspection, memory analysis, and gas usage tracking across all supported frameworks.</p>
-                        <a href="features/debugging.html" class="feature-link">Learn More →</a>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <h4>🌐 Network Management</h4>
-                        <p>Visual network manager with real-time status monitoring, easy configuration, and support for 50+ networks.</p>
-                        <a href="features/networks.html" class="feature-link">Learn More →</a>
-                    </div>
-                    
-                    <div class="feature-item">
-                        <h4>🧪 Testing Suite</h4>
-                        <p>Comprehensive testing capabilities including coverage analysis, gas optimization, and fuzz testing with detailed reporting.</p>
-                        <a href="features/testing.html" class="feature-link">Learn More →</a>
-                    </div>
-                </div>
-                
-                <!-- Feature Deep Dives -->
-                <div class="feature-deep-dives">
-                    <h3>📚 Feature Deep Dives</h3>
-                    <div class="deep-dive-grid">
-                        <a href="features/getting-started.html" class="deep-dive-card">
-                            <div class="dive-icon">🚀</div>
-                            <div class="dive-content">
-                                <h4>Getting Started</h4>
-                                <p>Complete installation guide, first-time setup, and creating your first blockchain project</p>
-                                <ul class="dive-features">
-                                    <li>Installation & Prerequisites</li>
-                                    <li>Framework Detection</li>
-                                    <li>Project Creation Wizards</li>
-                                    <li>Basic Development Workflow</li>
-                                </ul>
-                            </div>
-                        </a>
-                        
-                        <a href="features/compilation.html" class="deep-dive-card">
-                            <div class="dive-icon">⚙️</div>
-                            <div class="dive-content">
-                                <h4>Smart Contract Compilation</h4>
-                                <p>Advanced compilation features with optimization, error handling, and artifact management</p>
-                                <ul class="dive-features">
-                                    <li>Multi-Framework Compilation</li>
-                                    <li>Gas Optimization Settings</li>
-                                    <li>Error Detection & Resolution</li>
-                                    <li>Artifact Management</li>
-                                </ul>
-                            </div>
-                        </a>
-                        
-                        <a href="features/debugging.html" class="deep-dive-card">
-                            <div class="dive-icon">🔍</div>
-                            <div class="dive-content">
-                                <h4>Advanced EVM Debugging</h4>
-                                <p>Deep EVM state inspection with memory analysis, gas tracking, and transaction debugging</p>
-                                <ul class="dive-features">
-                                    <li>Step-through Debugging</li>
-                                    <li>EVM State Inspection</li>
-                                    <li>Gas Usage Analysis</li>
-                                    <li>Transaction Tracing</li>
-                                </ul>
-                            </div>
-                        </a>
-                        
-                        <a href="features/testing.html" class="deep-dive-card">
-                            <div class="dive-icon">🧪</div>
-                            <div class="dive-content">
-                                <h4>Testing & Coverage</h4>
-                                <p>Comprehensive testing capabilities with coverage analysis and performance optimization</p>
-                                <ul class="dive-features">
-                                    <li>Unit & Integration Testing</li>
-                                    <li>Code Coverage Reports</li>
-                                    <li>Gas Usage Optimization</li>
-                                    <li>Fuzz Testing</li>
-                                </ul>
-                            </div>
-                        </a>
-                        
-                        <a href="features/deployment.html" class="deep-dive-card">
-                            <div class="dive-icon">🚀</div>
-                            <div class="dive-content">
-                                <h4>Contract Deployment</h4>
-                                <p>Multi-network deployment with verification, monitoring, and management tools</p>
-                                <ul class="dive-features">
-                                    <li>Multi-Chain Deployment</li>
-                                    <li>Contract Verification</li>
-                                    <li>Deployment Scripts</li>
-                                    <li>Post-Deploy Monitoring</li>
-                                </ul>
-                            </div>
-                        </a>
-                        
-                        <a href="features/networks.html" class="deep-dive-card">
-                            <div class="dive-icon">🌐</div>
-                            <div class="dive-content">
-                                <h4>Network Management</h4>
-                                <p>Comprehensive network configuration and management with real-time monitoring</p>
-                                <ul class="dive-features">
-                                    <li>Network Configuration</li>
-                                    <li>Real-time Monitoring</li>
-                                    <li>Multi-Chain Support</li>
-                                    <li>Provider Integration</li>
-                                </ul>
-                            </div>
-                        </a>
-                        
-                        <a href="features/security.html" class="deep-dive-card">
-                            <div class="dive-icon">🛡️</div>
-                            <div class="dive-content">
-                                <h4>Security Analysis</h4>
-                                <p>Automated security scanning with vulnerability detection and best practice enforcement</p>
-                                <ul class="dive-features">
-                                    <li>Vulnerability Scanning</li>
-                                    <li>Best Practice Enforcement</li>
-                                    <li>Security Reports</li>
-                                    <li>Audit Integration</li>
-                                </ul>
-                            </div>
-                        </a>
-                        
-                        <a href="features/cicd.html" class="deep-dive-card">
-                            <div class="dive-icon">🔄</div>
-                            <div class="dive-content">
-                                <h4>CI/CD Integration</h4>
-                                <p>Automated testing, deployment, and monitoring with popular CI/CD platforms</p>
-                                <ul class="dive-features">
-                                    <li>GitHub Actions Integration</li>
-                                    <li>Automated Testing</li>
-                                    <li>Deployment Pipelines</li>
-                                    <li>Performance Monitoring</li>
-                                </ul>
-                            </div>
-                        </a>
-                    </div>
-                </div>      <h3 id="compilation">Smart Contract Compilation</h3>
-      <p>Compile your smart contracts across different frameworks:</p>
-      <div class="code-block" data-language="javascript">// Command Palette: "Blockchain: Compile Contracts"
+    <!-- Core Features Section -->
+    <section id="core-features" class="docs-section">
+      <h2>🛠️ Core Features</h2>
+      
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h4>🔧 Multi-Framework Support</h4>
+          <p>Unified interface for Hardhat, Truffle, Foundry, and Solana with automatic framework detection and seamless switching.</p>
+          <a href="features/getting-started.html" class="feature-link">Learn More →</a>
+        </div>
+        
+        <div class="feature-item">
+          <h4>🐛 Advanced Debugging</h4>
+          <p>Step-through debugging with EVM state inspection, memory analysis, and gas usage tracking across all supported frameworks.</p>
+          <a href="features/debugging.html" class="feature-link">Learn More →</a>
+        </div>
+        
+        <div class="feature-item">
+          <h4>🌐 Network Management</h4>
+          <p>Visual network manager with real-time status monitoring, easy configuration, and support for 50+ networks.</p>
+          <a href="features/networks.html" class="feature-link">Learn More →</a>
+        </div>
+        
+        <div class="feature-item">
+          <h4>🧪 Testing Suite</h4>
+          <p>Comprehensive testing capabilities including coverage analysis, gas optimization, and fuzz testing with detailed reporting.</p>
+          <a href="features/testing.html" class="feature-link">Learn More →</a>
+        </div>
+      </div>
+
+      <h3 id="compilation">Smart Contract Compilation</h3>
+      <p>Compile your smart contracts across different frameworks with unified commands:</p>
+      <div class="code-block-container">
+        <pre class="language-javascript" data-language="javascript"><code class="language-javascript">// Command Palette: "Blockchain: Compile Contracts"
 // Or use keyboard shortcut: Ctrl+Shift+B
 
 // Framework-specific compilation:
 // Hardhat: npx hardhat compile
 // Truffle: truffle compile  
-// Foundry: forge build</div>
+// Foundry: forge build</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">⚡ Auto-Compilation</div>
+        <p>Enable auto-compilation to automatically compile contracts when you save Solidity files. Configure in extension settings.</p>
+      </div>
 
       <h3 id="testing">Testing & Coverage</h3>
-      <p>Run comprehensive tests with coverage analysis:</p>
+      <p>Run comprehensive tests with coverage analysis and gas optimization:</p>
       <div class="command-list">
         <div class="command-item">
           <div class="command-name">Blockchain: Run Tests</div>
@@ -829,18 +855,109 @@ code .</div>
           <div class="command-name">Blockchain: Run Fuzz Tests</div>
           <div class="command-description">Execute property-based fuzz testing</div>
         </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Gas Analysis</div>
+          <div class="command-description">Analyze gas usage and optimization opportunities</div>
+        </div>
       </div>
 
       <h3 id="deployment">Smart Contract Deployment</h3>
       <p>Deploy contracts to multiple networks with comprehensive management:</p>
-      <div class="code-block" data-language="bash"># Select network first
+      <div class="code-block-container">
+        <pre class="language-bash" data-language="bash"><code class="language-bash"># Select network first
 Blockchain: Select Network
 
 # Deploy contracts
 Blockchain: Deploy Contracts
 
 # Verify on block explorer
-Blockchain: Verify Contract</div>
+Blockchain: Verify Contract
+
+# Monitor deployment status
+Blockchain: Check Deployment Status</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h4>📋 Deployment Scripts</h4>
+          <p>Generate and manage deployment scripts with support for migrations, upgrades, and multi-stage deployments.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🔍 Contract Verification</h4>
+          <p>Automatically verify deployed contracts on popular block explorers like Etherscan, Polygonscan, and more.</p>
+        </div>
+        <div class="feature-item">
+          <h4>📊 Deployment Tracking</h4>
+          <p>Track deployment history, gas costs, and contract addresses across different networks.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🔐 Security Checks</h4>
+          <p>Pre-deployment security validation to ensure contracts meet safety standards.</p>
+        </div>
+      </div>
+
+      <!-- Feature Deep Dives -->
+      <div class="feature-deep-dives">
+        <h3>📚 Feature Deep Dives</h3>
+        <div class="deep-dive-grid">
+          <a href="features/getting-started.html" class="deep-dive-card">
+            <div class="dive-icon">🚀</div>
+            <div class="dive-content">
+              <h4>Getting Started</h4>
+              <p>Complete installation guide, first-time setup, and creating your first blockchain project</p>
+              <ul class="dive-features">
+                <li>Installation & Prerequisites</li>
+                <li>Framework Detection</li>
+                <li>Project Creation Wizards</li>
+                <li>Basic Development Workflow</li>
+              </ul>
+            </div>
+          </a>
+          
+          <a href="features/compilation.html" class="deep-dive-card">
+            <div class="dive-icon">⚙️</div>
+            <div class="dive-content">
+              <h4>Smart Contract Compilation</h4>
+              <p>Advanced compilation features with optimization, error handling, and artifact management</p>
+              <ul class="dive-features">
+                <li>Multi-Framework Compilation</li>
+                <li>Gas Optimization Settings</li>
+                <li>Error Detection & Resolution</li>
+                <li>Artifact Management</li>
+              </ul>
+            </div>
+          </a>
+          
+          <a href="features/debugging.html" class="deep-dive-card">
+            <div class="dive-icon">�</div>
+            <div class="dive-content">
+              <h4>Advanced EVM Debugging</h4>
+              <p>Deep EVM state inspection with memory analysis, gas tracking, and transaction debugging</p>
+              <ul class="dive-features">
+                <li>Step-through Debugging</li>
+                <li>EVM State Inspection</li>
+                <li>Gas Usage Analysis</li>
+                <li>Transaction Tracing</li>
+              </ul>
+            </div>
+          </a>
+          
+          <a href="features/testing.html" class="deep-dive-card">
+            <div class="dive-icon">🧪</div>
+            <div class="dive-content">
+              <h4>Testing & Coverage</h4>
+              <p>Comprehensive testing capabilities with coverage analysis and performance optimization</p>
+              <ul class="dive-features">
+                <li>Unit & Integration Testing</li>
+                <li>Code Coverage Reports</li>
+                <li>Gas Usage Optimization</li>
+                <li>Fuzz Testing</li>
+              </ul>
+            </div>
+          </a>
+        </div>
+      </div>
     </section>
 
     <!-- Advanced Features Section -->
@@ -848,28 +965,29 @@ Blockchain: Verify Contract</div>
       <h2>🌟 Advanced Features</h2>
       
       <h3 id="evm-debugging">EVM State Debugging</h3>
-      <p>Advanced EVM debugging capabilities for deep contract analysis:</p>
+      <p>Advanced EVM debugging capabilities for deep contract analysis and optimization:</p>
       
       <div class="feature-grid">
         <div class="feature-item">
-          <h4>Stack Inspection</h4>
+          <h4>📚 Stack Inspection</h4>
           <p>View and analyze EVM stack contents with automatic type detection and value formatting.</p>
         </div>
         <div class="feature-item">
-          <h4>Memory Analysis</h4>
+          <h4>🧠 Memory Analysis</h4>
           <p>Inspect EVM memory with chunk visualization, search functionality, and hex/ASCII views.</p>
         </div>
         <div class="feature-item">
-          <h4>Storage Inspection</h4>
+          <h4>💾 Storage Inspection</h4>
           <p>Deep dive into contract storage slots with variable name resolution and mapping support.</p>
         </div>
         <div class="feature-item">
-          <h4>Gas Analysis</h4>
+          <h4>⛽ Gas Analysis</h4>
           <p>Real-time gas usage tracking with optimization suggestions and cost breakdown.</p>
         </div>
       </div>
 
-      <div class="code-block" data-language="bash"># Start EVM debugging session
+      <div class="code-block-container">
+        <pre class="language-bash" data-language="bash"><code class="language-bash"># Start EVM debugging session
 Blockchain: EVM Debug: Start
 
 # Debug specific transaction
@@ -882,14 +1000,40 @@ Blockchain: EVM Debug: Step Backward
 # Inspect EVM state
 Blockchain: EVM Debug: Show Memory Dump
 Blockchain: EVM Debug: Show Stack Trace
-Blockchain: EVM Debug: Show Storage State</div>
+Blockchain: EVM Debug: Show Storage State</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
+
+      <div class="callout">
+        <div class="callout-title">🔬 Advanced Debugging</div>
+        <p>The EVM debugger supports breakpoints, watch expressions, and step-by-step execution analysis. Perfect for understanding complex contract interactions and optimizing gas usage.</p>
+      </div>
 
       <h3 id="frameworks">Multi-Framework Development</h3>
-      <p>Work with multiple blockchain frameworks in a single workspace:</p>
+      <p>Work seamlessly with multiple blockchain frameworks in a single workspace:</p>
       
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h4>🔄 Framework Detection</h4>
+          <p>Automatic detection of Hardhat, Truffle, Foundry, Solana, and other frameworks in your workspace.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🎯 Unified Commands</h4>
+          <p>Single command palette interface that works across all detected frameworks seamlessly.</p>
+        </div>
+        <div class="feature-item">
+          <h4>📂 Project Organization</h4>
+          <p>Intelligent project structure navigation with framework-specific file organization.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🔧 Cross-Framework Tools</h4>
+          <p>Shared tooling and utilities that work regardless of your chosen framework.</p>
+        </div>
+      </div>
+
       <div class="callout">
-        <div class="callout-title">ℹ️ Framework Detection</div>
-        <p>The extension automatically detects multiple frameworks in your workspace and provides unified commands that work across all detected frameworks.</p>
+        <div class="callout-title">ℹ️ Framework Support</div>
+        <p>The extension automatically detects multiple frameworks in your workspace and provides unified commands that work across all detected frameworks. Switch between projects seamlessly.</p>
       </div>
 
       <h3 id="cicd">CI/CD Integration</h3>
@@ -905,13 +1049,36 @@ Blockchain: EVM Debug: Show Storage State</div>
           <div class="command-description">Create GitLab CI pipeline configuration</div>
         </div>
         <div class="command-item">
+          <div class="command-name">Blockchain: Generate Docker Config</div>
+          <div class="command-description">Create Docker configurations for containerized deployments</div>
+        </div>
+        <div class="command-item">
           <div class="command-name">Blockchain: Run Security Scan</div>
           <div class="command-description">Execute automated security vulnerability analysis</div>
         </div>
       </div>
 
+      <div class="feature-grid">
+        <div class="feature-item">
+          <h4>🚀 Automated Testing</h4>
+          <p>Set up automated test runs on every commit with comprehensive coverage reporting.</p>
+        </div>
+        <div class="feature-item">
+          <h4>📦 Deployment Pipelines</h4>
+          <p>Configure multi-stage deployments with automatic verification and rollback capabilities.</p>
+        </div>
+        <div class="feature-item">
+          <h4>📊 Performance Monitoring</h4>
+          <p>Track deployment performance, gas costs, and contract interaction metrics.</p>
+        </div>
+        <div class="feature-item">
+          <h4>🔔 Notifications</h4>
+          <p>Get notified of deployment status, test failures, and security issues via multiple channels.</p>
+        </div>
+      </div>
+
       <h3 id="security">Security Features</h3>
-      <p>Enterprise-grade security scanning and best practices:</p>
+      <p>Enterprise-grade security scanning and best practices enforcement:</p>
       
       <div class="feature-grid">
         <div class="feature-item">
@@ -929,6 +1096,25 @@ Blockchain: EVM Debug: Show Storage State</div>
         <div class="feature-item">
           <h4>🔐 Audit Integration</h4>
           <p>Integration with popular audit tools and services for comprehensive security analysis.</p>
+        </div>
+      </div>
+
+      <div class="command-list">
+        <div class="command-item">
+          <div class="command-name">Blockchain: Security Audit</div>
+          <div class="command-description">Run comprehensive security audit on your smart contracts</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Generate Security Report</div>
+          <div class="command-description">Create detailed security analysis report</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Check Best Practices</div>
+          <div class="command-description">Validate code against security best practices</div>
+        </div>
+        <div class="command-item">
+          <div class="command-name">Blockchain: Dependency Scan</div>
+          <div class="command-description">Scan project dependencies for known vulnerabilities</div>
         </div>
       </div>
     </section>
@@ -999,16 +1185,20 @@ Blockchain: EVM Debug: Show Storage State</div>
       <p>Customize the extension behavior through VS Code settings:</p>
 
       <h3>Basic Settings</h3>
-      <div class="code-block" data-language="json">{
+      <div class="code-block-container">
+        <pre class="language-json" data-language="json"><code class="language-json">{
   "blockchain.autoDetectFrameworks": true,
   "blockchain.defaultNetwork": "localhost",
   "blockchain.enableDebugMode": false,
   "blockchain.autoCompile": false,
   "blockchain.enableGasReporting": true
-}</div>
+}</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
 
       <h3>Advanced Configuration</h3>
-      <div class="code-block" data-language="json">{
+      <div class="code-block-container">
+        <pre class="language-json" data-language="json"><code class="language-json">{
   "blockchain.solidity.version": "0.8.19",
   "blockchain.solidity.optimizer": true,
   "blockchain.solidity.optimizerRuns": 200,
@@ -1025,12 +1215,15 @@ Blockchain: EVM Debug: Show Storage State</div>
     ],
     "minSeverity": "medium"
   }
-}</div>
+}</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
 
       <h3>Network Configuration</h3>
       <p>Networks are configured in your framework's configuration file:</p>
       
-      <div class="code-block" data-language="javascript">// hardhat.config.js
+      <div class="code-block-container">
+        <pre class="language-javascript" data-language="javascript"><code class="language-javascript">// hardhat.config.js
 module.exports = {
   networks: {
     localhost: {
@@ -1048,7 +1241,9 @@ module.exports = {
       chainId: 1
     }
   }
-};</div>
+};</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
     </section>
 
     <!-- Troubleshooting Section -->
@@ -1088,10 +1283,13 @@ module.exports = {
 
       <h3>Debug Mode</h3>
       <p>Enable debug mode for detailed logging:</p>
-      <div class="code-block" data-language="json">{
+      <div class="code-block-container">
+        <pre class="language-json" data-language="json"><code class="language-json">{
   "blockchain.enableDebugMode": true,
   "blockchain.logLevel": "debug"
-}</div>
+}</code></pre>
+        <button class="copy-button" onclick="copyCode(this)"><i class="fas fa-copy"></i></button>
+      </div>
 
       <p>View logs in VS Code Output panel → "Blockchain Toolkit"</p>
     </section>
@@ -1114,8 +1312,36 @@ module.exports = {
 </div>
 
 <script>
+// Copy code functionality
+function copyCode(button) {
+  const codeBlock = button.previousElementSibling.querySelector('code');
+  const text = codeBlock.textContent;
+  
+  navigator.clipboard.writeText(text).then(() => {
+    const originalHTML = button.innerHTML;
+    button.innerHTML = '<i class="fas fa-check"></i>';
+    button.style.background = 'rgba(16, 185, 129, 0.2)';
+    button.style.borderColor = 'rgba(16, 185, 129, 0.5)';
+    button.style.color = '#10B981';
+    
+    setTimeout(() => {
+      button.innerHTML = originalHTML;
+      button.style.background = '';
+      button.style.borderColor = '';
+      button.style.color = '';
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy code: ', err);
+  });
+}
+
 // Documentation-specific JavaScript
 document.addEventListener('DOMContentLoaded', function() {
+  // Initialize Prism.js syntax highlighting
+  if (typeof Prism !== 'undefined') {
+    Prism.highlightAll();
+  }
+
   // Smooth scrolling for sidebar links
   const sidebarLinks = document.querySelectorAll('.docs-nav-links a');
   sidebarLinks.forEach(link => {
