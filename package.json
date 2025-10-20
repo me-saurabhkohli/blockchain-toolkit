@@ -3,12 +3,21 @@
   "displayName": "Blockchain Toolkit",
   "description": "Comprehensive VS Code extension for blockchain development supporting Hardhat, Truffle, Ethers.js, Web3.js, Hyperledger Fabric, and Solana with smart contract development, testing, deployment, and debugging features.",
   "version": "1.0.0",
+  "publisher": "blockchain-toolkit",
   "author": {
     "name": "Saurabh Kohli",
     "email": "me.saurabhkohli@gmail.com",
     "url": "https://github.com/me-saurabhkohli"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/me-saurabhkohli/blockchain-toolkit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/me-saurabhkohli/blockchain-toolkit/issues"
+  },
+  "homepage": "https://github.com/me-saurabhkohli/blockchain-toolkit#readme",
   "engines": {
     "vscode": "^1.74.0"
   },
@@ -373,7 +382,7 @@
       {
         "command": "blockchain.testFrameworkDetection",
         "title": "Test Framework Detection",
-        "category": "Blockchain", 
+        "category": "Blockchain",
         "icon": "$(search)"
       },
       {
@@ -649,7 +658,7 @@
       {
         "command": "blockchain.security.configure",
         "title": "Configure Security",
-        "category": "Blockchain Security", 
+        "category": "Blockchain Security",
         "icon": "$(gear)"
       },
       {
@@ -758,7 +767,7 @@
         },
         {
           "command": "blockchain.security.configure",
-          "when": "view == blockchainSecurity", 
+          "when": "view == blockchainSecurity",
           "group": "navigation@2"
         },
         {
@@ -1051,7 +1060,7 @@
               "description": "Maximum number of stack items to display"
             },
             "maxMemoryChunks": {
-              "type": "number", 
+              "type": "number",
               "default": 100,
               "description": "Maximum number of memory chunks to display"
             },
@@ -1079,7 +1088,7 @@
               "default": [
                 "unchecked-return-value",
                 "reentrancy",
-                "access-control", 
+                "access-control",
                 "tx-origin",
                 "unused-variable"
               ],
@@ -1092,7 +1101,12 @@
             },
             "minSeverity": {
               "type": "string",
-              "enum": ["high", "medium", "low", "info"],
+              "enum": [
+                "high",
+                "medium",
+                "low",
+                "info"
+              ],
               "default": "medium",
               "description": "Minimum severity level to display"
             },
@@ -1101,7 +1115,10 @@
               "items": {
                 "type": "string"
               },
-              "default": ["node_modules/**", "test/**"],
+              "default": [
+                "node_modules/**",
+                "test/**"
+              ],
               "description": "Paths to exclude from security analysis"
             }
           }
@@ -1122,7 +1139,12 @@
           "framework": {
             "type": "string",
             "description": "The blockchain framework to use",
-            "enum": ["hardhat", "truffle", "foundry", "solana"]
+            "enum": [
+              "hardhat",
+              "truffle",
+              "foundry",
+              "solana"
+            ]
           },
           "args": {
             "type": "array",
@@ -1325,6 +1347,7 @@
     "@typescript-eslint/eslint-plugin": "^5.45.0",
     "@typescript-eslint/parser": "^5.45.0",
     "@vscode/test-electron": "^2.2.0",
+    "@vscode/vsce": "^3.6.2",
     "eslint": "^8.28.0",
     "typescript": "^4.9.4",
     "vsce": "^2.15.0"

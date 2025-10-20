@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Blockchain Toolkit</title>
+    <meta name="description" content="Get started with Blockchain Toolkit VS Code extension. Installation, setup, and first steps guide.">
+    
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #007acc;
+            --primary-dark: #005a9e;
+            --secondary-color: #f3f3f3;
+            --accent-color: #ff6b35;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-light: #999;
+            --text-code: #888;
+            --background: #ffffff;
+            --surface: #f8f9fa;
+            --border: #e9ecef;
+            --shadow: 0 2px 20px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 4rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-nav {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .sidebar-nav h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s;
+        }
+
+        .sidebar-nav ul li a:hover,
+        .sidebar-nav ul li a.active {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* Content */
+        .content {
+            max-width: none;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: var(--primary-color);
+        }
+
+        .content h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .content ul, .content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Inline Code */
+        code {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+        }
+
+        /* Inline Code in paragraphs */
+        p code {
+            color: var(--text-code);
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1565c0;
+        }
+
+        .alert-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #ef6c00;
+        }
+
+        .alert-success {
+            background: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .alert-danger {
+            background: #ffebee;
+            border-color: #f44336;
+            color: #c62828;
+        }
+
+        /* Installation Steps */
+        .installation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .installation-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .installation-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .installation-card .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin: 0 auto 1rem;
+        }
+
+        .installation-card h4 {
+            margin-bottom: 1rem;
+        }
+
+        /* Framework Cards */
+        .framework-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin: 2rem 0 1rem;
+        }
+
+        .framework-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .framework-tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .framework-content {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .framework-content.active {
+            display: block;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Blockchain Toolkit">
+                Blockchain Toolkit
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="getting-started.html" class="active">Get Started</a></li>
+                <li><a href="commands.html">Commands</a></li>
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="https://github.com/me-saurabhkohli/blockchain-toolkit">GitHub</a></li>
+            </ul>
+            <a href="https://marketplace.visualstudio.com/items?itemName=blockchain-toolkit.blockchain-toolkit" class="cta-button">
+                Install Extension
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <h3>Getting Started</h3>
+                    <ul>
+                        <li><a href="#installation" class="active">Installation</a></li>
+                        <li><a href="#requirements">Requirements</a></li>
+                        <li><a href="#first-project">First Project</a></li>
+                        <li><a href="#framework-setup">Framework Setup</a></li>
+                        <li><a href="#first-commands">First Commands</a></li>
+                        <li><a href="#configuration">Configuration</a></li>
+                        <li><a href="#next-steps">Next Steps</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <article class="content">
+                <h1>Getting Started</h1>
+                <p>Welcome to Blockchain Toolkit! This guide will help you install, configure, and start using the extension for blockchain development in VS Code.</p>
+
+                <h2 id="installation">Installation</h2>
+                <p>There are several ways to install Blockchain Toolkit. Choose the method that works best for you:</p>
+
+                <div class="installation-grid">
+                    <div class="installation-card">
+                        <div class="step-number">1</div>
+                        <h4>VS Code Marketplace</h4>
+                        <p>Search for "Blockchain Toolkit" in VS Code Extensions panel or click the install button below.</p>
+                        <a href="https://marketplace.visualstudio.com/items?itemName=blockchain-toolkit.blockchain-toolkit" class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            Install from Marketplace
+                        </a>
+                    </div>
+
+                    <div class="installation-card">
+                        <div class="step-number">2</div>
+                        <h4>Command Line</h4>
+                        <p>Install directly from the command line using the VS Code CLI:</p>
+                        <div class="code-block">
+                            <code>code --install-extension blockchain-toolkit.blockchain-toolkit</code>
+                        </div>
+                    </div>
+
+                    <div class="installation-card">
+                        <div class="step-number">3</div>
+                        <h4>Manual Installation</h4>
+                        <p>Download the VSIX file from GitHub releases and install manually:</p>
+                        <div class="code-block">
+                            <code>code --install-extension blockchain-toolkit-1.0.0.vsix</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert alert-info">
+                    <strong>Note:</strong> After installation, you may need to reload VS Code for the extension to activate properly.
+                </div>
+
+                <h2 id="requirements">Requirements</h2>
+                <p>Before using Blockchain Toolkit, ensure you have the following prerequisites installed:</p>
+
+                <h3>Essential Prerequisites</h3>
+                <ul>
+                    <li><strong>VS Code</strong> (v1.74.0 or higher) - Latest version recommended</li>
+                    <li><strong>Node.js</strong> (v16 or higher) - Required for Ethereum-based frameworks</li>
+                    <li><strong>npm/yarn/pnpm</strong> - Package manager for dependencies</li>
+                    <li><strong>Git</strong> - Version control and repository operations</li>
+                </ul>
+
+                <h3>Framework-Specific Requirements</h3>
+                <ul>
+                    <li><strong>Rust & Cargo</strong> - For Solana/Anchor and Foundry development</li>
+                    <li><strong>Python 3.8+</strong> - For Brownie framework support</li>
+                    <li><strong>Docker</strong> (Optional) - For containerized blockchain nodes</li>
+                </ul>
+
+                <div class="code-block">
+                    <pre><code class="language-bash"># Check your versions
+node --version    # Should be v16+
+npm --version     # Should be v8+
+git --version     # Should be v2.20+
+code --version    # Should be v1.74+
+
+# Install Rust (for Foundry/Solana)
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Verify Rust installation
+rustc --version
+cargo --version</code></pre>
+                </div>
+
+                <h2 id="first-project">Your First Project</h2>
+                <p>Let's create your first blockchain project using Blockchain Toolkit. The extension supports multiple frameworks, so you can choose the one that fits your needs.</p>
+
+                <div class="framework-tabs">
+                    <button class="framework-tab active" data-framework="hardhat">Hardhat</button>
+                    <button class="framework-tab" data-framework="foundry">Foundry</button>
+                    <button class="framework-tab" data-framework="truffle">Truffle</button>
+                    <button class="framework-tab" data-framework="solana">Solana</button>
+                </div>
+
+                <div class="framework-content active" id="hardhat-content">
+                    <h3>Creating a Hardhat Project</h3>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Create a new directory
+mkdir my-blockchain-project
+cd my-blockchain-project
+
+# Initialize Hardhat project
+npx hardhat init
+
+# Install dependencies
+npm install
+
+# Open in VS Code
+code .</code></pre>
+                    </div>
+                    <p>The extension will automatically detect the Hardhat configuration and activate blockchain-specific features.</p>
+                </div>
+
+                <div class="framework-content" id="foundry-content">
+                    <h3>Creating a Foundry Project</h3>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Install Foundry (if not already installed)
+curl -L https://foundry.paradigm.xyz | bash
+foundryup
+
+# Create a new Foundry project
+forge init my-foundry-project
+cd my-foundry-project
+
+# Open in VS Code
+code .</code></pre>
+                    </div>
+                    <p>Foundry projects are automatically detected by the presence of <code>foundry.toml</code> configuration file.</p>
+                </div>
+
+                <div class="framework-content" id="truffle-content">
+                    <h3>Creating a Truffle Project</h3>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Install Truffle globally
+npm install -g truffle
+
+# Create a new directory and initialize
+mkdir my-truffle-project
+cd my-truffle-project
+truffle init
+
+# Open in VS Code
+code .</code></pre>
+                    </div>
+                    <p>Truffle projects are detected by <code>truffle-config.js</code> or <code>truffle.js</code> files.</p>
+                </div>
+
+                <div class="framework-content" id="solana-content">
+                    <h3>Creating a Solana/Anchor Project</h3>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Install Anchor CLI
+cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+avm install latest
+avm use latest
+
+# Create a new Anchor project
+anchor init my-solana-project
+cd my-solana-project
+
+# Open in VS Code
+code .</code></pre>
+                    </div>
+                    <p>Solana projects are detected by <code>Anchor.toml</code> and <code>Cargo.toml</code> files.</p>
+                </div>
+
+                <h2 id="framework-setup">Framework Setup</h2>
+                <p>Once you have created your project, the extension will automatically detect the framework and provide relevant commands and features. Here's what happens:</p>
+
+                <h3>Automatic Detection</h3>
+                <ul>
+                    <li><strong>Hardhat</strong>: Detected by <code>hardhat.config.js/ts</code></li>
+                    <li><strong>Truffle</strong>: Detected by <code>truffle-config.js</code> or <code>truffle.js</code></li>
+                    <li><strong>Foundry</strong>: Detected by <code>foundry.toml</code></li>
+                    <li><strong>Solana</strong>: Detected by <code>Anchor.toml</code> and <code>Cargo.toml</code></li>
+                </ul>
+
+                <h3>Extension Activation</h3>
+                <p>When you open a blockchain project, you'll see:</p>
+                <ul>
+                    <li>🔧 Blockchain Toolkit icon in the Activity Bar</li>
+                    <li>📁 Project explorer with blockchain-specific views</li>
+                    <li>⚡ Status bar showing active network and framework</li>
+                    <li>🎯 Command palette with blockchain commands</li>
+                </ul>
+
+                <h2 id="first-commands">Your First Commands</h2>
+                <p>Now that your project is set up, let's run some basic commands to get familiar with the extension:</p>
+
+                <h3>Opening the Command Palette</h3>
+                <p>Press <code>Ctrl+Shift+P</code> (or <code>Cmd+Shift+P</code> on Mac) and type "Blockchain" to see all available commands.</p>
+
+                <h3>Essential Commands to Try</h3>
+
+                <h4>1. Compile Contracts</h4>
+                <div class="code-block">
+                    <pre><code># Command Palette
+Blockchain: Compile Contracts
+
+# Or use framework-specific command
+Blockchain: Compile Contracts (Hardhat)</code></pre>
+                </div>
+
+                <h4>2. Run Tests</h4>
+                <div class="code-block">
+                    <pre><code># Command Palette
+Blockchain: Test
+
+# Framework-specific
+Blockchain: Run Tests (Hardhat)</code></pre>
+                </div>
+
+                <h4>3. Start Local Node</h4>
+                <div class="code-block">
+                    <pre><code># Command Palette
+Blockchain: Start Local Node</code></pre>
+                </div>
+
+                <h4>4. Deploy Contracts</h4>
+                <div class="code-block">
+                    <pre><code># Command Palette
+Blockchain: Deploy
+
+# Or deploy to specific network
+Blockchain: Deploy Contracts</code></pre>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>Tip:</strong> You can also access commands by right-clicking on Solidity files in the explorer or using the blockchain icon in the Activity Bar.
+                </div>
+
+                <h2 id="configuration">Basic Configuration</h2>
+                <p>The extension works out of the box, but you can customize it through VS Code settings:</p>
+
+                <h3>Open Settings</h3>
+                <p>Go to <code>File > Preferences > Settings</code> and search for "blockchain" to see all available options.</p>
+
+                <h3>Key Settings</h3>
+                <div class="code-block">
+                    <pre><code class="language-json">{
+  // Core Settings
+  "blockchain.defaultNetwork": "localhost",
+  "blockchain.enableGasReporting": true,
+  "blockchain.solcVersion": "0.8.19",
+  "blockchain.autoCompile": false,
+  "blockchain.enableDebugMode": false,
+
+  // EVM Debug Settings
+  "blockchain.evmDebug.autoRefresh": true,
+  "blockchain.evmDebug.showHexValues": true,
+
+  // Security Settings
+  "blockchain.security.runOnSave": false,
+  "blockchain.security.minSeverity": "medium"
+}</code></pre>
+                </div>
+
+                <h3>Environment Variables</h3>
+                <p>Create a <code>.env</code> file in your project root for API keys and private keys:</p>
+
+                <div class="code-block">
+                    <pre><code class="language-bash"># Network RPC URLs
+MAINNET_URL=https://mainnet.infura.io/v3/YOUR_INFURA_KEY
+GOERLI_URL=https://goerli.infura.io/v3/YOUR_INFURA_KEY
+
+# Private Keys (use with caution)
+PRIVATE_KEY=your_private_key_here
+
+# API Keys
+INFURA_KEY=your_infura_project_id
+ETHERSCAN_API_KEY=your_etherscan_api_key</code></pre>
+                </div>
+
+                <div class="alert alert-warning">
+                    <strong>Security Warning:</strong> Never commit private keys to version control. Add <code>.env</code> to your <code>.gitignore</code> file.
+                </div>
+
+                <h2 id="next-steps">Next Steps</h2>
+                <p>Congratulations! You now have Blockchain Toolkit set up and ready to use. Here are some recommended next steps:</p>
+
+                <h3>Explore Features</h3>
+                <ul>
+                    <li><strong><a href="debugging.html">Advanced Debugging</a></strong> - Learn about EVM state debugging and transaction analysis</li>
+                    <li><strong><a href="networks.html">Network Management</a></strong> - Configure networks and manage connections</li>
+                    <li><strong><a href="security.html">Security Analysis</a></strong> - Run security scans on your contracts</li>
+                    <li><strong><a href="testing.html">Testing Tools</a></strong> - Advanced testing with coverage and gas optimization</li>
+                </ul>
+
+                <h3>Learn More</h3>
+                <ul>
+                    <li><strong><a href="commands.html">Command Reference</a></strong> - Complete list of all 150+ commands</li>
+                    <li><strong><a href="examples.html">Examples & Tutorials</a></strong> - Step-by-step project examples</li>
+                    <li><strong><a href="configuration.html">Advanced Configuration</a></strong> - Detailed configuration options</li>
+                    <li><strong><a href="troubleshooting.html">Troubleshooting</a></strong> - Common issues and solutions</li>
+                </ul>
+
+                <h3>Join the Community</h3>
+                <ul>
+                    <li><strong><a href="https://github.com/me-saurabhkohli/blockchain-toolkit">GitHub Repository</a></strong> - Source code and issues</li>
+                    <li><strong><a href="https://github.com/me-saurabhkohli/blockchain-toolkit/discussions">Discussions</a></strong> - Community support and feature requests</li>
+                    <li><strong><a href="mailto:me.saurabhkohli@gmail.com">Direct Support</a></strong> - Get help from the creator</li>
+                </ul>
+
+                <div class="alert alert-info">
+                    <strong>Need Help?</strong> If you encounter any issues or have questions, don't hesitate to reach out through our <a href="https://github.com/me-saurabhkohli/blockchain-toolkit/discussions">community discussions</a> or <a href="https://github.com/me-saurabhkohli/blockchain-toolkit/issues">issue tracker</a>.
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script>
+        // Framework tabs functionality
+        document.querySelectorAll('.framework-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.framework-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.framework-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const framework = tab.dataset.framework;
+                document.getElementById(`${framework}-content`).classList.add('active');
+            });
+        });
+
+        // Smooth scrolling for sidebar links
+        document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all sidebar links
+                document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Scroll to target
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active sidebar link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('h2[id], h3[id]');
+            const scrollPos = window.scrollY + 150;
+            
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                const id = section.getAttribute('id');
+                const navLink = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
+                
+                if (navLink && scrollPos >= top && scrollPos <= bottom) {
+                    document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+                    navLink.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

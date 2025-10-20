@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commands Reference - Blockchain Toolkit</title>
+    <meta name="description" content="Complete reference of all 150+ commands available in Blockchain Toolkit VS Code extension.">
+    
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #007acc;
+            --primary-dark: #005a9e;
+            --secondary-color: #f3f3f3;
+            --accent-color: #ff6b35;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-light: #999;
+            --text-code: #888;
+            --background: #ffffff;
+            --surface: #f8f9fa;
+            --border: #e9ecef;
+            --shadow: 0 2px 20px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 4rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-nav {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .sidebar-nav h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-nav ul li a:hover,
+        .sidebar-nav ul li a.active {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* Search */
+        .search-section {
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-tag {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-tag.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Content */
+        .content {
+            max-width: none;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Command Categories */
+        .command-category {
+            margin: 3rem 0;
+            background: white;
+            border-radius: 12px;
+            border: 2px solid var(--border);
+            overflow: hidden;
+        }
+
+        .category-header {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .category-header:hover {
+            background: #e9ecef;
+        }
+
+        .category-header h2 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .category-toggle {
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+        .category-header.collapsed .category-toggle {
+            transform: rotate(180deg);
+        }
+
+        .category-description {
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .category-commands {
+            padding: 0;
+            max-height: 2000px;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .category-commands.collapsed {
+            max-height: 0;
+        }
+
+        /* Command Items */
+        .command-item {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            transition: background-color 0.3s;
+        }
+
+        .command-item:last-child {
+            border-bottom: none;
+        }
+
+        .command-item:hover {
+            background: #f8f9fa;
+        }
+
+        .command-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+        }
+
+        .command-name {
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary-color);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .command-badges {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .command-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .badge-framework {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .badge-category {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .badge-keybinding {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .command-description {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .command-usage {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .command-example {
+            margin-top: 1rem;
+        }
+
+        .command-example h5 {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Framework Icons */
+        .framework-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .command-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Blockchain Toolkit">
+                Blockchain Toolkit
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="getting-started.html">Get Started</a></li>
+                <li><a href="commands.html" class="active">Commands</a></li>
+                <li><a href="examples.html">Examples</a></li>
+                <li><a href="https://github.com/me-saurabhkohli/blockchain-toolkit">GitHub</a></li>
+            </ul>
+            <a href="https://marketplace.visualstudio.com/items?itemName=blockchain-toolkit.blockchain-toolkit" class="cta-button">
+                Install Extension
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <h3>Command Categories</h3>
+                    <ul>
+                        <li><a href="#blockchain-commands" class="active">Blockchain</a></li>
+                        <li><a href="#network-commands">Network</a></li>
+                        <li><a href="#services-commands">Services</a></li>
+                        <li><a href="#evm-debug-commands">EVM Debug</a></li>
+                        <li><a href="#security-commands">Security</a></li>
+                        <li><a href="#contract-commands">Contract</a></li>
+                        <li><a href="#templates-commands">Templates</a></li>
+                        <li><a href="#framework-commands">Framework</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <article class="content">
+                <h1>Commands Reference</h1>
+                <p>Complete reference of all 150+ commands available in Blockchain Toolkit. Use the search box to find specific commands or browse by category.</p>
+
+                <!-- Search Section -->
+                <div class="search-section">
+                    <div class="search-box">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search commands..." id="command-search">
+                    </div>
+                    <div class="filter-tags">
+                        <span class="filter-tag active" data-filter="all">All</span>
+                        <span class="filter-tag" data-filter="hardhat">Hardhat</span>
+                        <span class="filter-tag" data-filter="foundry">Foundry</span>
+                        <span class="filter-tag" data-filter="truffle">Truffle</span>
+                        <span class="filter-tag" data-filter="solana">Solana</span>
+                        <span class="filter-tag" data-filter="debug">Debug</span>
+                        <span class="filter-tag" data-filter="security">Security</span>
+                    </div>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <span class="stat-number">150+</span>
+                        <span class="stat-label">Total Commands</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Categories</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">7</span>
+                        <span class="stat-label">Frameworks</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-number">25+</span>
+                        <span class="stat-label">Keybindings</span>
+                    </div>
+                </div>
+
+                <!-- Blockchain Commands -->
+                <div class="command-category" id="blockchain-commands">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h2>
+                            <span>🔗 Blockchain Commands</span>
+                            <span class="category-toggle">▲</span>
+                        </h2>
+                        <p class="category-description">Core blockchain development commands for compilation, deployment, and testing</p>
+                    </div>
+                    <div class="category-commands">
+                        <div class="command-item" data-tags="compile hardhat foundry truffle">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.compile</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">All Frameworks</span>
+                                    <span class="command-badge badge-keybinding">Ctrl+Shift+B</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Compile smart contracts using the detected framework. Automatically detects Solidity version and optimizations.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Compile Contracts"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="test hardhat foundry truffle">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.test</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">All Frameworks</span>
+                                    <span class="command-badge badge-keybinding">Ctrl+Shift+T</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Run all tests in the project with coverage reporting and gas usage analysis.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Run Tests"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="deploy hardhat foundry truffle">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.deploy</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">All Frameworks</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Deploy contracts to selected network with verification and constructor argument support.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Deploy Contracts"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="node hardhat foundry">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.startLocalNode</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Hardhat/Foundry</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Start a local blockchain node for development and testing with pre-funded accounts.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Start Local Node"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="clean hardhat foundry truffle">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.clean</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">All Frameworks</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Clean build artifacts and cache files to ensure fresh compilation.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Clean Build Artifacts"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Commands -->
+                <div class="command-category" id="network-commands">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h2>
+                            <span>🌐 Network Commands</span>
+                            <span class="category-toggle">▲</span>
+                        </h2>
+                        <p class="category-description">Network management, switching, and configuration commands</p>
+                    </div>
+                    <div class="category-commands">
+                        <div class="command-item" data-tags="network switch">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.switchNetwork</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">All Networks</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Switch between configured networks (localhost, testnet, mainnet) with automatic RPC validation.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Switch Network"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="network add configure">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.addNetwork</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Configuration</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Add a new network configuration with RPC URL, chain ID, and explorer settings.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Add Network"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="network status check">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.networkStatus</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Monitoring</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Check current network status, block height, gas prices, and connection health.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Network Status"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EVM Debug Commands -->
+                <div class="command-category" id="evm-debug-commands">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h2>
+                            <span>🐛 EVM Debug Commands</span>
+                            <span class="category-toggle">▲</span>
+                        </h2>
+                        <p class="category-description">Advanced debugging tools for EVM state inspection and transaction analysis</p>
+                    </div>
+                    <div class="category-commands">
+                        <div class="command-item" data-tags="debug transaction trace">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.debugTransaction</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">EVM</span>
+                                    <span class="command-badge badge-keybinding">F5</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Debug a specific transaction with step-by-step execution trace and state changes.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Debug Transaction"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="debug state inspect">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.inspectState</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">EVM</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Inspect EVM state at any block height including storage, balance, and code.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Inspect State"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="debug trace opcodes">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.traceCall</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">EVM</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Trace function calls with detailed opcode execution and gas consumption analysis.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Trace Call"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Commands -->
+                <div class="command-category" id="security-commands">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h2>
+                            <span>🛡️ Security Commands</span>
+                            <span class="category-toggle">▲</span>
+                        </h2>
+                        <p class="category-description">Security analysis and vulnerability detection tools</p>
+                    </div>
+                    <div class="category-commands">
+                        <div class="command-item" data-tags="security scan vulnerability">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.securityScan</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Security</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Run comprehensive security analysis using multiple tools (Slither, MythX, Semgrep).
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Security Scan"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="security audit mythx">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.mythxScan</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">MythX</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Professional security audit using MythX static analysis platform.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: MythX Scan"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="security slither static">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.slitherScan</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Slither</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Fast static analysis using Slither with customizable detector configuration.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Slither Analysis"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Framework-Specific Commands -->
+                <div class="command-category" id="framework-commands">
+                    <div class="category-header" onclick="toggleCategory(this)">
+                        <h2>
+                            <span>⚙️ Framework Commands</span>
+                            <span class="category-toggle">▲</span>
+                        </h2>
+                        <p class="category-description">Framework-specific commands for Hardhat, Foundry, Truffle, and Solana</p>
+                    </div>
+                    <div class="category-commands">
+                        <div class="command-item" data-tags="hardhat task">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.hardhat.task</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Hardhat</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Run any Hardhat task with parameter support and output formatting.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Run Hardhat Task"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="foundry forge build">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.foundry.build</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Foundry</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Build Foundry project with forge, including library linking and optimization.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Foundry Build"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="foundry anvil node">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.foundry.anvil</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Foundry</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Start Anvil local node with fork capability and custom configuration.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Start Anvil"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="solana anchor build">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.solana.build</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Solana</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Build Solana programs using Anchor framework with IDL generation.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Build Solana Program"</div>
+                        </div>
+
+                        <div class="command-item" data-tags="solana deploy program">
+                            <div class="command-header">
+                                <div class="command-name">blockchain.solana.deploy</div>
+                                <div class="command-badges">
+                                    <span class="command-badge badge-framework">Solana</span>
+                                </div>
+                            </div>
+                            <div class="command-description">
+                                Deploy Solana programs to selected cluster with upgrade authority management.
+                            </div>
+                            <div class="command-usage">Command Palette: "Blockchain: Deploy Solana Program"</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More categories would continue here... -->
+            </article>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('command-search');
+        const commandItems = document.querySelectorAll('.command-item');
+        const filterTags = document.querySelectorAll('.filter-tag');
+
+        let activeFilter = 'all';
+
+        searchInput.addEventListener('input', filterCommands);
+
+        filterTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                // Update active filter
+                filterTags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                activeFilter = tag.dataset.filter;
+                
+                filterCommands();
+            });
+        });
+
+        function filterCommands() {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            commandItems.forEach(item => {
+                const commandName = item.querySelector('.command-name').textContent.toLowerCase();
+                const description = item.querySelector('.command-description').textContent.toLowerCase();
+                const tags = item.dataset.tags.toLowerCase();
+                
+                const matchesSearch = commandName.includes(searchTerm) || 
+                                    description.includes(searchTerm) || 
+                                    tags.includes(searchTerm);
+                
+                const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+                
+                if (matchesSearch && matchesFilter) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Category toggle functionality
+        function toggleCategory(header) {
+            const commands = header.nextElementSibling;
+            const toggle = header.querySelector('.category-toggle');
+            
+            if (commands.classList.contains('collapsed')) {
+                commands.classList.remove('collapsed');
+                header.classList.remove('collapsed');
+                toggle.textContent = '▲';
+            } else {
+                commands.classList.add('collapsed');
+                header.classList.add('collapsed');
+                toggle.textContent = '▼';
+            }
+        }
+
+        // Sidebar navigation
+        document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all sidebar links
+                document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Scroll to target
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active sidebar link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.command-category');
+            const scrollPos = window.scrollY + 150;
+            
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                const id = section.getAttribute('id');
+                const navLink = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
+                
+                if (navLink && scrollPos >= top && scrollPos <= bottom) {
+                    document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+                    navLink.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Examples & Tutorials - Blockchain Toolkit</title>
+    <meta name="description" content="Step-by-step examples and tutorials for Blockchain Toolkit VS Code extension.">
+    
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #007acc;
+            --primary-dark: #005a9e;
+            --secondary-color: #f3f3f3;
+            --accent-color: #ff6b35;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-light: #999;
+            --text-code: #888;
+            --background: #ffffff;
+            --surface: #f8f9fa;
+            --border: #e9ecef;
+            --shadow: 0 2px 20px rgba(0,0,0,0.1);
+            --gradient: linear-gradient(135deg, #007acc 0%, #005a9e 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--background);
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background: var(--gradient);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 4rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 3rem;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .sidebar-nav {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .sidebar-nav h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+        }
+
+        .sidebar-nav ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-nav ul li a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            display: block;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .sidebar-nav ul li a:hover,
+        .sidebar-nav ul li a.active {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        /* Content */
+        .content {
+            max-width: none;
+        }
+
+        .content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 3rem 0 1.5rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: var(--primary-color);
+        }
+
+        .content h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+
+        .content ol, .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Tutorial Cards */
+        .tutorial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tutorial-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .tutorial-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .tutorial-header {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tutorial-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .tutorial-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .tutorial-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tutorial-badge {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 500;
+        }
+
+        .badge-level-beginner {
+            background: #e8f5e8;
+            color: #2e7d32;
+        }
+
+        .badge-level-intermediate {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .badge-level-advanced {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .badge-time {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .tutorial-content {
+            padding: 1.5rem;
+        }
+
+        /* Step-by-step styling */
+        .tutorial-step {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .step-title {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .step-title h4 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Inline Code */
+        code {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9em;
+            color: var(--secondary-color);
+        }
+
+        /* Inline Code in paragraphs */
+        p code {
+            color: var(--text-code);
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid;
+        }
+
+        .alert-info {
+            background: #e3f2fd;
+            border-color: #2196f3;
+            color: #1565c0;
+        }
+
+        .alert-warning {
+            background: #fff3e0;
+            border-color: #ff9800;
+            color: #ef6c00;
+        }
+
+        .alert-success {
+            background: #e8f5e8;
+            border-color: #4caf50;
+            color: #2e7d32;
+        }
+
+        .alert-tip {
+            background: #f3e5f5;
+            border-color: #9c27b0;
+            color: #6a1b9a;
+        }
+
+        /* Framework Tabs */
+        .framework-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin: 2rem 0 1rem;
+        }
+
+        .framework-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all 0.3s;
+        }
+
+        .framework-tab.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .framework-content {
+            display: none;
+            padding: 2rem 0;
+        }
+
+        .framework-content.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .tutorial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/logo.png" alt="Blockchain Toolkit">
+                Blockchain Toolkit
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="getting-started.html">Get Started</a></li>
+                <li><a href="commands.html">Commands</a></li>
+                <li><a href="examples.html" class="active">Examples</a></li>
+                <li><a href="https://github.com/me-saurabhkohli/blockchain-toolkit">GitHub</a></li>
+            </ul>
+            <a href="https://marketplace.visualstudio.com/items?itemName=blockchain-toolkit.blockchain-toolkit" class="cta-button">
+                Install Extension
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <h3>Examples</h3>
+                    <ul>
+                        <li><a href="#quick-start" class="active">Quick Start</a></li>
+                        <li><a href="#erc20-token">ERC-20 Token</a></li>
+                        <li><a href="#nft-collection">NFT Collection</a></li>
+                        <li><a href="#defi-protocol">DeFi Protocol</a></li>
+                        <li><a href="#debugging-guide">Debugging Guide</a></li>
+                        <li><a href="#security-audit">Security Audit</a></li>
+                        <li><a href="#solana-program">Solana Program</a></li>
+                        <li><a href="#testing-strategies">Testing Strategies</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Content -->
+            <article class="content">
+                <h1>Examples & Tutorials</h1>
+                <p>Learn Blockchain Toolkit through practical examples and step-by-step tutorials. Each example includes complete code, explanations, and best practices.</p>
+
+                <!-- Tutorial Overview Grid -->
+                <div class="tutorial-grid">
+                    <div class="tutorial-card">
+                        <div class="tutorial-header">
+                            <div class="tutorial-title">🚀 Quick Start Tutorial</div>
+                            <div class="tutorial-description">Set up your first project and deploy a simple smart contract in under 10 minutes.</div>
+                            <div class="tutorial-meta">
+                                <span class="tutorial-badge badge-level-beginner">Beginner</span>
+                                <span class="tutorial-badge badge-time">10 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-card">
+                        <div class="tutorial-header">
+                            <div class="tutorial-title">🪙 ERC-20 Token</div>
+                            <div class="tutorial-description">Create, test, and deploy a full-featured ERC-20 token with advanced functionality.</div>
+                            <div class="tutorial-meta">
+                                <span class="tutorial-badge badge-level-beginner">Beginner</span>
+                                <span class="tutorial-badge badge-time">30 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-card">
+                        <div class="tutorial-header">
+                            <div class="tutorial-title">🎨 NFT Collection</div>
+                            <div class="tutorial-description">Build and deploy an NFT collection with minting, metadata, and marketplace integration.</div>
+                            <div class="tutorial-meta">
+                                <span class="tutorial-badge badge-level-intermediate">Intermediate</span>
+                                <span class="tutorial-badge badge-time">45 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-card">
+                        <div class="tutorial-header">
+                            <div class="tutorial-title">🏦 DeFi Protocol</div>
+                            <div class="tutorial-description">Develop a complete DeFi lending protocol with yield farming and governance.</div>
+                            <div class="tutorial-meta">
+                                <span class="tutorial-badge badge-level-advanced">Advanced</span>
+                                <span class="tutorial-badge badge-time">2 hours</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-card">
+                        <div class="tutorial-header">
+                            <div class="tutorial-title">🐛 Advanced Debugging</div>
+                            <div class="tutorial-description">Master EVM debugging techniques, transaction tracing, and state inspection.</div>
+                            <div class="tutorial-meta">
+                                <span class="tutorial-badge badge-level-intermediate">Intermediate</span>
+                                <span class="tutorial-badge badge-time">40 min</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-card">
+                        <div class="tutorial-header">
+                            <div class="tutorial-title">🛡️ Security Best Practices</div>
+                            <div class="tutorial-description">Learn security auditing techniques and how to protect your smart contracts.</div>
+                            <div class="tutorial-meta">
+                                <span class="tutorial-badge badge-level-advanced">Advanced</span>
+                                <span class="tutorial-badge badge-time">1 hour</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="quick-start">🚀 Quick Start Tutorial</h2>
+                <p>This tutorial will get you up and running with Blockchain Toolkit in under 10 minutes. You'll create a simple smart contract, compile it, test it, and deploy it to a local network.</p>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h4>Create a New Project</h4>
+                    </div>
+                    <p>First, let's create a new Hardhat project using the extension:</p>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Create a new directory
+mkdir my-first-dapp
+cd my-first-dapp
+
+# Initialize Hardhat project
+npx hardhat init
+
+# Choose "Create a JavaScript project"
+# Accept default settings
+
+# Open in VS Code
+code .</code></pre>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> When you open the project in VS Code, Blockchain Toolkit will automatically detect the Hardhat configuration and activate.
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h4>Write Your First Contract</h4>
+                    </div>
+                    <p>Create a simple storage contract in <code>contracts/SimpleStorage.sol</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+contract SimpleStorage {
+    uint256 private storedData;
+    
+    event DataStored(uint256 indexed value, address indexed sender);
+    
+    function set(uint256 x) public {
+        storedData = x;
+        emit DataStored(x, msg.sender);
+    }
+    
+    function get() public view returns (uint256) {
+        return storedData;
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h4>Compile the Contract</h4>
+                    </div>
+                    <p>Use the extension to compile your contract:</p>
+                    <ol>
+                        <li>Open Command Palette (<code>Ctrl+Shift+P</code>)</li>
+                        <li>Type "Blockchain: Compile" and select it</li>
+                        <li>Or right-click on the contract file and select "Compile Contract"</li>
+                    </ol>
+                    <div class="alert alert-success">
+                        <strong>Success!</strong> You should see compilation artifacts generated in the <code>artifacts/</code> directory.
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">4</div>
+                        <h4>Write Tests</h4>
+                    </div>
+                    <p>Create a test file <code>test/SimpleStorage.js</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">const { expect } = require("chai");
+
+describe("SimpleStorage", function () {
+  let simpleStorage;
+  let owner;
+
+  beforeEach(async function () {
+    [owner] = await ethers.getSigners();
+    const SimpleStorage = await ethers.getContractFactory("SimpleStorage");
+    simpleStorage = await SimpleStorage.deploy();
+  });
+
+  it("Should store and retrieve a value", async function () {
+    const value = 42;
+    
+    // Set the value
+    await simpleStorage.set(value);
+    
+    // Get the value
+    expect(await simpleStorage.get()).to.equal(value);
+  });
+
+  it("Should emit DataStored event", async function () {
+    const value = 123;
+    
+    await expect(simpleStorage.set(value))
+      .to.emit(simpleStorage, "DataStored")
+      .withArgs(value, owner.address);
+  });
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">5</div>
+                        <h4>Run Tests</h4>
+                    </div>
+                    <p>Execute your tests using the extension:</p>
+                    <ol>
+                        <li>Open Command Palette (<code>Ctrl+Shift+P</code>)</li>
+                        <li>Type "Blockchain: Test" and select it</li>
+                        <li>Watch the test results in the output panel</li>
+                    </ol>
+                    <div class="alert alert-tip">
+                        <strong>Tip:</strong> Use <code>Ctrl+Shift+T</code> as a keyboard shortcut for running tests.
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">6</div>
+                        <h4>Deploy to Local Network</h4>
+                    </div>
+                    <p>Deploy your contract to a local Hardhat network:</p>
+                    <ol>
+                        <li>Start local node: Command Palette → "Blockchain: Start Local Node"</li>
+                        <li>Deploy contract: Command Palette → "Blockchain: Deploy"</li>
+                        <li>Select your contract and deployment network</li>
+                    </ol>
+                    <div class="alert alert-success">
+                        <strong>Congratulations!</strong> You've successfully created, tested, and deployed your first smart contract using Blockchain Toolkit.
+                    </div>
+                </div>
+
+                <h2 id="erc20-token">🪙 ERC-20 Token Tutorial</h2>
+                <p>Learn how to create a full-featured ERC-20 token with advanced features like minting, burning, and access control.</p>
+
+                <div class="framework-tabs">
+                    <button class="framework-tab active" data-framework="hardhat">Hardhat</button>
+                    <button class="framework-tab" data-framework="foundry">Foundry</button>
+                    <button class="framework-tab" data-framework="truffle">Truffle</button>
+                </div>
+
+                <div class="framework-content active" id="hardhat-erc20">
+                    <div class="tutorial-step">
+                        <div class="step-title">
+                            <div class="step-number">1</div>
+                            <h4>Setup and Dependencies</h4>
+                        </div>
+                        <p>Create a new Hardhat project and install OpenZeppelin:</p>
+                        <div class="code-block">
+                            <pre><code class="language-bash"># Create project
+mkdir my-token-project
+cd my-token-project
+npx hardhat init
+
+# Install OpenZeppelin
+npm install @openzeppelin/contracts
+
+# Open in VS Code
+code .</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-title">
+                            <div class="step-number">2</div>
+                            <h4>Create the Token Contract</h4>
+                        </div>
+                        <p>Create <code>contracts/MyToken.sol</code>:</p>
+                        <div class="code-block">
+                            <pre><code class="language-solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract MyToken is ERC20, ERC20Burnable, Pausable, Ownable {
+    uint256 public constant MAX_SUPPLY = 1000000 * 10**18; // 1 million tokens
+    
+    constructor() ERC20("MyToken", "MTK") {
+        _mint(msg.sender, 100000 * 10**18); // Initial mint: 100k tokens
+    }
+    
+    function pause() public onlyOwner {
+        _pause();
+    }
+    
+    function unpause() public onlyOwner {
+        _unpause();
+    }
+    
+    function mint(address to, uint256 amount) public onlyOwner {
+        require(totalSupply() + amount <= MAX_SUPPLY, "Exceeds max supply");
+        _mint(to, amount);
+    }
+    
+    function _beforeTokenTransfer(address from, address to, uint256 amount)
+        internal
+        whenNotPaused
+        override
+    {
+        super._beforeTokenTransfer(from, to, amount);
+    }
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-title">
+                            <div class="step-number">3</div>
+                            <h4>Compile and Test</h4>
+                        </div>
+                        <p>Use Blockchain Toolkit to compile and test your token:</p>
+                        <ol>
+                            <li>Compile: <code>Ctrl+Shift+P</code> → "Blockchain: Compile"</li>
+                            <li>Create comprehensive tests in <code>test/MyToken.js</code></li>
+                            <li>Run tests: <code>Ctrl+Shift+P</code> → "Blockchain: Test"</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="framework-content" id="foundry-erc20">
+                    <div class="tutorial-step">
+                        <div class="step-title">
+                            <div class="step-number">1</div>
+                            <h4>Setup Foundry Project</h4>
+                        </div>
+                        <div class="code-block">
+                            <pre><code class="language-bash"># Create project
+forge init my-token-foundry
+cd my-token-foundry
+
+# Install OpenZeppelin
+forge install OpenZeppelin/openzeppelin-contracts
+
+# Open in VS Code
+code .</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="tutorial-step">
+                        <div class="step-title">
+                            <div class="step-number">2</div>
+                            <h4>Configure Dependencies</h4>
+                        </div>
+                        <p>Update <code>foundry.toml</code>:</p>
+                        <div class="code-block">
+                            <pre><code class="language-toml">[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+remappings = [
+    "@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/"
+]</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="nft-collection">🎨 NFT Collection Tutorial</h2>
+                <p>Build and deploy a complete NFT collection with minting, metadata management, and marketplace integration.</p>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h4>Project Setup</h4>
+                    </div>
+                    <p>Create a new project for your NFT collection:</p>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Create new project
+mkdir my-nft-collection
+cd my-nft-collection
+npx hardhat init
+
+# Install dependencies
+npm install @openzeppelin/contracts
+npm install @nomiclabs/hardhat-etherscan
+
+# Open in VS Code
+code .</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h4>Create NFT Contract</h4>
+                    </div>
+                    <p>Create <code>contracts/MyNFTCollection.sol</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
+
+contract MyNFTCollection is ERC721, ERC721Enumerable, Pausable, Ownable {
+    using Counters for Counters.Counter;
+
+    Counters.Counter private _tokenIdCounter;
+    
+    uint256 public constant MAX_SUPPLY = 10000;
+    uint256 public constant MINT_PRICE = 0.001 ether;
+    uint256 public constant MAX_MINT_PER_TX = 10;
+    
+    string private _baseTokenURI;
+    bool public mintingActive = false;
+    
+    constructor(string memory baseURI) ERC721("MyNFTCollection", "MNC") {
+        _baseTokenURI = baseURI;
+    }
+    
+    function mint(uint256 quantity) external payable whenNotPaused {
+        require(mintingActive, "Minting is not active");
+        require(quantity > 0 && quantity <= MAX_MINT_PER_TX, "Invalid quantity");
+        require(totalSupply() + quantity <= MAX_SUPPLY, "Exceeds max supply");
+        require(msg.value >= MINT_PRICE * quantity, "Insufficient payment");
+        
+        for (uint256 i = 0; i < quantity; i++) {
+            uint256 tokenId = _tokenIdCounter.current();
+            _tokenIdCounter.increment();
+            _safeMint(msg.sender, tokenId);
+        }
+    }
+    
+    function ownerMint(address to, uint256 quantity) external onlyOwner {
+        require(totalSupply() + quantity <= MAX_SUPPLY, "Exceeds max supply");
+        
+        for (uint256 i = 0; i < quantity; i++) {
+            uint256 tokenId = _tokenIdCounter.current();
+            _tokenIdCounter.increment();
+            _safeMint(to, tokenId);
+        }
+    }
+    
+    function setMintingActive(bool active) external onlyOwner {
+        mintingActive = active;
+    }
+    
+    function setBaseURI(string memory baseURI) external onlyOwner {
+        _baseTokenURI = baseURI;
+    }
+    
+    function withdraw() external onlyOwner {
+        payable(owner()).transfer(address(this).balance);
+    }
+    
+    function _baseURI() internal view override returns (string memory) {
+        return _baseTokenURI;
+    }
+    
+    function pause() public onlyOwner {
+        _pause();
+    }
+
+    function unpause() public onlyOwner {
+        _unpause();
+    }
+
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId, uint256 batchSize)
+        internal
+        whenNotPaused
+        override(ERC721, ERC721Enumerable)
+    {
+        super._beforeTokenTransfer(from, to, tokenId, batchSize);
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(ERC721, ERC721Enumerable)
+        returns (bool)
+    {
+        return super.supportsInterface(interfaceId);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h4>Create Metadata Structure</h4>
+                    </div>
+                    <p>Set up metadata for your NFTs. Create a <code>metadata/</code> directory:</p>
+                    <div class="code-block">
+                        <pre><code class="language-json">{
+  "name": "My NFT Collection #1",
+  "description": "A unique digital collectible",
+  "image": "https://your-domain.com/images/1.png",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Blue"
+    },
+    {
+      "trait_type": "Character",
+      "value": "Robot"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Common"
+    }
+  ]
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">4</div>
+                        <h4>Deploy and Verify</h4>
+                    </div>
+                    <p>Use Blockchain Toolkit to deploy and verify your NFT contract:</p>
+                    <ol>
+                        <li>Compile: <code>Ctrl+Shift+P</code> → "Blockchain: Compile"</li>
+                        <li>Deploy: <code>Ctrl+Shift+P</code> → "Blockchain: Deploy"</li>
+                        <li>Verify: <code>Ctrl+Shift+P</code> → "Blockchain: Verify Contract"</li>
+                    </ol>
+                    <div class="alert alert-tip">
+                        <strong>Tip:</strong> Make sure to upload your metadata to IPFS before setting the base URI.
+                    </div>
+                </div>
+
+                <h2 id="defi-protocol">🏦 DeFi Protocol Tutorial</h2>
+                <p>Build a complete DeFi lending protocol with yield farming and governance features.</p>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h4>Protocol Architecture</h4>
+                    </div>
+                    <p>Create the main lending pool contract <code>contracts/LendingPool.sol</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract LendingPool is ReentrancyGuard, Ownable {
+    using SafeERC20 for IERC20;
+    
+    struct UserInfo {
+        uint256 amount;
+        uint256 rewardDebt;
+        uint256 lastDepositTime;
+    }
+    
+    struct PoolInfo {
+        IERC20 token;
+        uint256 totalSupply;
+        uint256 accRewardPerShare;
+        uint256 lastRewardBlock;
+        uint256 rewardPerBlock;
+        uint256 lockupPeriod;
+    }
+    
+    PoolInfo[] public poolInfo;
+    mapping(uint256 => mapping(address => UserInfo)) public userInfo;
+    
+    IERC20 public rewardToken;
+    uint256 public startBlock;
+    
+    event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
+    event Withdraw(address indexed user, uint256 indexed pid, uint256 amount);
+    event EmergencyWithdraw(address indexed user, uint256 indexed pid, uint256 amount);
+    
+    constructor(IERC20 _rewardToken, uint256 _startBlock) {
+        rewardToken = _rewardToken;
+        startBlock = _startBlock;
+    }
+    
+    function addPool(
+        IERC20 _token,
+        uint256 _rewardPerBlock,
+        uint256 _lockupPeriod
+    ) external onlyOwner {
+        poolInfo.push(PoolInfo({
+            token: _token,
+            totalSupply: 0,
+            accRewardPerShare: 0,
+            lastRewardBlock: block.number > startBlock ? block.number : startBlock,
+            rewardPerBlock: _rewardPerBlock,
+            lockupPeriod: _lockupPeriod
+        }));
+    }
+    
+    function updatePool(uint256 _pid) public {
+        PoolInfo storage pool = poolInfo[_pid];
+        if (block.number <= pool.lastRewardBlock) {
+            return;
+        }
+        
+        if (pool.totalSupply == 0) {
+            pool.lastRewardBlock = block.number;
+            return;
+        }
+        
+        uint256 multiplier = block.number - pool.lastRewardBlock;
+        uint256 reward = multiplier * pool.rewardPerBlock;
+        pool.accRewardPerShare += (reward * 1e12) / pool.totalSupply;
+        pool.lastRewardBlock = block.number;
+    }
+    
+    function deposit(uint256 _pid, uint256 _amount) external nonReentrant {
+        PoolInfo storage pool = poolInfo[_pid];
+        UserInfo storage user = userInfo[_pid][msg.sender];
+        
+        updatePool(_pid);
+        
+        if (user.amount > 0) {
+            uint256 pending = (user.amount * pool.accRewardPerShare) / 1e12 - user.rewardDebt;
+            if (pending > 0) {
+                rewardToken.safeTransfer(msg.sender, pending);
+            }
+        }
+        
+        if (_amount > 0) {
+            pool.token.safeTransferFrom(msg.sender, address(this), _amount);
+            user.amount += _amount;
+            pool.totalSupply += _amount;
+            user.lastDepositTime = block.timestamp;
+        }
+        
+        user.rewardDebt = (user.amount * pool.accRewardPerShare) / 1e12;
+        emit Deposit(msg.sender, _pid, _amount);
+    }
+    
+    function withdraw(uint256 _pid, uint256 _amount) external nonReentrant {
+        PoolInfo storage pool = poolInfo[_pid];
+        UserInfo storage user = userInfo[_pid][msg.sender];
+        
+        require(user.amount >= _amount, "Insufficient balance");
+        require(
+            block.timestamp >= user.lastDepositTime + pool.lockupPeriod,
+            "Lockup period not met"
+        );
+        
+        updatePool(_pid);
+        
+        uint256 pending = (user.amount * pool.accRewardPerShare) / 1e12 - user.rewardDebt;
+        if (pending > 0) {
+            rewardToken.safeTransfer(msg.sender, pending);
+        }
+        
+        if (_amount > 0) {
+            user.amount -= _amount;
+            pool.totalSupply -= _amount;
+            pool.token.safeTransfer(msg.sender, _amount);
+        }
+        
+        user.rewardDebt = (user.amount * pool.accRewardPerShare) / 1e12;
+        emit Withdraw(msg.sender, _pid, _amount);
+    }
+    
+    function pendingReward(uint256 _pid, address _user) external view returns (uint256) {
+        PoolInfo storage pool = poolInfo[_pid];
+        UserInfo storage user = userInfo[_pid][_user];
+        
+        uint256 accRewardPerShare = pool.accRewardPerShare;
+        if (block.number > pool.lastRewardBlock && pool.totalSupply != 0) {
+            uint256 multiplier = block.number - pool.lastRewardBlock;
+            uint256 reward = multiplier * pool.rewardPerBlock;
+            accRewardPerShare += (reward * 1e12) / pool.totalSupply;
+        }
+        
+        return (user.amount * accRewardPerShare) / 1e12 - user.rewardDebt;
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h4>Add Governance Features</h4>
+                    </div>
+                    <p>Create a governance token contract <code>contracts/GovernanceToken.sol</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Votes.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract GovernanceToken is ERC20, ERC20Permit, ERC20Votes, Ownable {
+    constructor() ERC20("GovernanceToken", "GOV") ERC20Permit("GovernanceToken") {
+        _mint(msg.sender, 1000000 * 10**decimals());
+    }
+
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
+    }
+
+    function _afterTokenTransfer(address from, address to, uint256 amount)
+        internal
+        override(ERC20, ERC20Votes)
+    {
+        super._afterTokenTransfer(from, to, amount);
+    }
+
+    function _mint(address to, uint256 amount)
+        internal
+        override(ERC20, ERC20Votes)
+    {
+        super._mint(to, amount);
+    }
+
+    function _burn(address account, uint256 amount)
+        internal
+        override(ERC20, ERC20Votes)
+    {
+        super._burn(account, amount);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <h2 id="security-audit">🛡️ Security Audit Tutorial</h2>
+                <p>Learn comprehensive security analysis techniques using Blockchain Toolkit's built-in security tools.</p>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h4>Automated Security Scanning</h4>
+                    </div>
+                    <p>Use Blockchain Toolkit's integrated security tools:</p>
+                    <ol>
+                        <li>Open Command Palette (<code>Ctrl+Shift+P</code>)</li>
+                        <li>Run "Blockchain: Security Scan" for comprehensive analysis</li>
+                        <li>Run "Blockchain: Slither Analysis" for static analysis</li>
+                        <li>Run "Blockchain: MythX Scan" for professional audit</li>
+                    </ol>
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> MythX requires an API key for full analysis. Get one from <a href="https://mythx.io">mythx.io</a>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h4>Common Vulnerability Patterns</h4>
+                    </div>
+                    <p>Example of vulnerable contract patterns to avoid:</p>
+                    <div class="code-block">
+                        <pre><code class="language-solidity">// VULNERABLE PATTERNS - DON'T USE IN PRODUCTION
+
+contract VulnerableContract {
+    mapping(address => uint256) public balances;
+    
+    // ❌ Reentrancy vulnerability
+    function withdraw() external {
+        uint256 amount = balances[msg.sender];
+        (bool success,) = msg.sender.call{value: amount}("");
+        require(success, "Transfer failed");
+        balances[msg.sender] = 0; // Too late!
+    }
+    
+    // ❌ Integer overflow (pre-0.8.0)
+    function unsafeAdd(uint256 a, uint256 b) external pure returns (uint256) {
+        return a + b; // Can overflow
+    }
+    
+    // ❌ Unchecked external call
+    function unsafeCall(address target, bytes calldata data) external {
+        target.call(data); // Ignores return value
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h4>Secure Implementation</h4>
+                    </div>
+                    <p>Secure version using best practices:</p>
+                    <div class="code-block">
+                        <pre><code class="language-solidity">// SECURE IMPLEMENTATION
+
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract SecureContract is ReentrancyGuard, Ownable {
+    mapping(address => uint256) public balances;
+    
+    event Withdrawal(address indexed user, uint256 amount);
+    event Deposit(address indexed user, uint256 amount);
+    
+    // ✅ Protected against reentrancy
+    function withdraw() external nonReentrant {
+        uint256 amount = balances[msg.sender];
+        require(amount > 0, "No balance to withdraw");
+        
+        balances[msg.sender] = 0; // Update state first
+        
+        (bool success,) = msg.sender.call{value: amount}("");
+        require(success, "Transfer failed");
+        
+        emit Withdrawal(msg.sender, amount);
+    }
+    
+    // ✅ Safe math (automatic in 0.8.0+)
+    function safeAdd(uint256 a, uint256 b) external pure returns (uint256) {
+        return a + b; // Automatically reverts on overflow
+    }
+    
+    // ✅ Checked external call
+    function safeCall(address target, bytes calldata data) external onlyOwner returns (bool) {
+        (bool success,) = target.call(data);
+        return success;
+    }
+    
+    // ✅ Deposit with proper checks
+    function deposit() external payable {
+        require(msg.value > 0, "Must send ETH");
+        balances[msg.sender] += msg.value;
+        emit Deposit(msg.sender, msg.value);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <h2 id="solana-program">⚡ Solana Program Tutorial</h2>
+                <p>Build and deploy Solana programs using Anchor framework with Blockchain Toolkit.</p>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h4>Setup Solana Development</h4>
+                    </div>
+                    <p>Install Solana tools and create an Anchor project:</p>
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Install Solana CLI
+sh -c "$(curl -sSfL https://release.solana.com/v1.16.0/install)"
+
+# Install Anchor
+cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+avm install latest
+avm use latest
+
+# Create new Anchor project
+anchor init my-solana-program
+cd my-solana-program
+
+# Open in VS Code
+code .</code></pre>
+                    </div>
+                    <div class="alert alert-info">
+                        <strong>Note:</strong> Blockchain Toolkit will automatically detect the Anchor project and provide Solana-specific commands.
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h4>Create Solana Program</h4>
+                    </div>
+                    <p>Edit <code>programs/my-solana-program/src/lib.rs</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-rust">use anchor_lang::prelude::*;
+
+declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+
+#[program]
+pub mod my_solana_program {
+    use super::*;
+
+    pub fn initialize(ctx: Context<Initialize>, data: u64) -> Result<()> {
+        let my_account = &mut ctx.accounts.my_account;
+        my_account.data = data;
+        my_account.authority = ctx.accounts.authority.key();
+        Ok(())
+    }
+
+    pub fn update(ctx: Context<Update>, data: u64) -> Result<()> {
+        let my_account = &mut ctx.accounts.my_account;
+        my_account.data = data;
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct Initialize<'info> {
+    #[account(
+        init,
+        payer = authority,
+        space = 8 + 32 + 8
+    )]
+    pub my_account: Account<'info, MyAccount>,
+    #[account(mut)]
+    pub authority: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[derive(Accounts)]
+pub struct Update<'info> {
+    #[account(
+        mut,
+        has_one = authority
+    )]
+    pub my_account: Account<'info, MyAccount>,
+    pub authority: Signer<'info>,
+}
+
+#[account]
+pub struct MyAccount {
+    pub authority: Pubkey,
+    pub data: u64,
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h4>Write Tests</h4>
+                    </div>
+                    <p>Create tests in <code>tests/my-solana-program.ts</code>:</p>
+                    <div class="code-block">
+                        <pre><code class="language-typescript">import * as anchor from "@coral-xyz/anchor";
+import { Program } from "@coral-xyz/anchor";
+import { MySolanaProgram } from "../target/types/my_solana_program";
+import { expect } from "chai";
+
+describe("my-solana-program", () => {
+  const provider = anchor.AnchorProvider.env();
+  anchor.setProvider(provider);
+
+  const program = anchor.workspace.MySolanaProgram as Program<MySolanaProgram>;
+  const myAccount = anchor.web3.Keypair.generate();
+
+  it("Initializes the account", async () => {
+    const tx = await program.methods
+      .initialize(new anchor.BN(1234))
+      .accounts({
+        myAccount: myAccount.publicKey,
+        authority: provider.wallet.publicKey,
+        systemProgram: anchor.web3.SystemProgram.programId,
+      })
+      .signers([myAccount])
+      .rpc();
+
+    console.log("Transaction signature:", tx);
+
+    const account = await program.account.myAccount.fetch(myAccount.publicKey);
+    expect(account.data.toNumber()).to.equal(1234);
+    expect(account.authority.toString()).to.equal(provider.wallet.publicKey.toString());
+  });
+
+  it("Updates the account", async () => {
+    await program.methods
+      .update(new anchor.BN(5678))
+      .accounts({
+        myAccount: myAccount.publicKey,
+        authority: provider.wallet.publicKey,
+      })
+      .rpc();
+
+    const account = await program.account.myAccount.fetch(myAccount.publicKey);
+    expect(account.data.toNumber()).to.equal(5678);
+  });
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">4</div>
+                        <h4>Build and Deploy</h4>
+                    </div>
+                    <p>Use Blockchain Toolkit commands:</p>
+                    <ol>
+                        <li>Build: <code>Ctrl+Shift+P</code> → "Blockchain: Build Solana Program"</li>
+                        <li>Test: <code>Ctrl+Shift+P</code> → "Blockchain: Test Solana Program"</li>
+                        <li>Deploy: <code>Ctrl+Shift+P</code> → "Blockchain: Deploy Solana Program"</li>
+                    </ol>
+                    <div class="alert alert-tip">
+                        <strong>Tip:</strong> Make sure to configure your Solana cluster (devnet/testnet/mainnet) before deploying.
+                    </div>
+                </div>
+
+                <h2 id="testing-strategies">🧪 Testing Strategies Tutorial</h2>
+                <p>Master comprehensive testing strategies using Blockchain Toolkit's advanced testing features.</p>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h4>Unit Testing Best Practices</h4>
+                    </div>
+                    <p>Create comprehensive unit tests with proper setup:</p>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">const { expect } = require("chai");
+const { ethers } = require("hardhat");
+const { loadFixture } = require("@nomicfoundation/hardhat-network-helpers");
+
+describe("Token Contract", function () {
+  // Fixture for consistent test setup
+  async function deployTokenFixture() {
+    const [owner, addr1, addr2] = await ethers.getSigners();
+    
+    const Token = await ethers.getContractFactory("Token");
+    const token = await Token.deploy("TestToken", "TT", 1000000);
+    
+    return { token, owner, addr1, addr2 };
+  }
+
+  describe("Deployment", function () {
+    it("Should set the right owner", async function () {
+      const { token, owner } = await loadFixture(deployTokenFixture);
+      expect(await token.owner()).to.equal(owner.address);
+    });
+
+    it("Should assign the total supply to the owner", async function () {
+      const { token, owner } = await loadFixture(deployTokenFixture);
+      const ownerBalance = await token.balanceOf(owner.address);
+      expect(await token.totalSupply()).to.equal(ownerBalance);
+    });
+  });
+
+  describe("Transactions", function () {
+    it("Should transfer tokens between accounts", async function () {
+      const { token, owner, addr1, addr2 } = await loadFixture(deployTokenFixture);
+      
+      // Transfer 50 tokens from owner to addr1
+      await expect(token.transfer(addr1.address, 50))
+        .to.changeTokenBalances(token, [owner, addr1], [-50, 50]);
+
+      // Transfer 50 tokens from addr1 to addr2
+      await expect(token.connect(addr1).transfer(addr2.address, 50))
+        .to.changeTokenBalances(token, [addr1, addr2], [-50, 50]);
+    });
+
+    it("Should fail if sender doesn't have enough tokens", async function () {
+      const { token, owner, addr1 } = await loadFixture(deployTokenFixture);
+      const initialOwnerBalance = await token.balanceOf(owner.address);
+
+      await expect(
+        token.connect(addr1).transfer(owner.address, 1)
+      ).to.be.revertedWith("ERC20: transfer amount exceeds balance");
+
+      expect(await token.balanceOf(owner.address)).to.equal(
+        initialOwnerBalance
+      );
+    });
+
+    it("Should emit Transfer events", async function () {
+      const { token, owner, addr1 } = await loadFixture(deployTokenFixture);
+
+      await expect(token.transfer(addr1.address, 50))
+        .to.emit(token, "Transfer")
+        .withArgs(owner.address, addr1.address, 50);
+    });
+  });
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h4>Integration Testing</h4>
+                    </div>
+                    <p>Test complex interactions between multiple contracts:</p>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">describe("DeFi Protocol Integration", function () {
+  let token, lendingPool, governance;
+  let owner, user1, user2;
+
+  beforeEach(async function () {
+    [owner, user1, user2] = await ethers.getSigners();
+    
+    // Deploy all contracts
+    const Token = await ethers.getContractFactory("Token");
+    token = await Token.deploy("TestToken", "TT", ethers.utils.parseEther("1000000"));
+    
+    const GovernanceToken = await ethers.getContractFactory("GovernanceToken");
+    governance = await GovernanceToken.deploy();
+    
+    const LendingPool = await ethers.getContractFactory("LendingPool");
+    lendingPool = await LendingPool.deploy(governance.address, 0);
+    
+    // Setup initial state
+    await token.transfer(user1.address, ethers.utils.parseEther("1000"));
+    await token.transfer(user2.address, ethers.utils.parseEther("1000"));
+    
+    await lendingPool.addPool(token.address, ethers.utils.parseEther("1"), 86400); // 1 day lockup
+  });
+
+  it("Should handle complete deposit-withdraw cycle", async function () {
+    const depositAmount = ethers.utils.parseEther("100");
+    
+    // User1 approves and deposits
+    await token.connect(user1).approve(lendingPool.address, depositAmount);
+    await lendingPool.connect(user1).deposit(0, depositAmount);
+    
+    // Check pool state
+    const poolInfo = await lendingPool.poolInfo(0);
+    expect(poolInfo.totalSupply).to.equal(depositAmount);
+    
+    // Fast forward time to after lockup period
+    await ethers.provider.send("evm_increaseTime", [86401]);
+    await ethers.provider.send("evm_mine");
+    
+    // Withdraw
+    await lendingPool.connect(user1).withdraw(0, depositAmount);
+    
+    // Verify final state
+    const finalBalance = await token.balanceOf(user1.address);
+    expect(finalBalance).to.be.gte(ethers.utils.parseEther("1000"));
+  });
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h4>Gas Optimization Testing</h4>
+                    </div>
+                    <p>Use Blockchain Toolkit's gas analysis features:</p>
+                    <ol>
+                        <li>Run tests: <code>Ctrl+Shift+P</code> → "Blockchain: Test with Gas Report"</li>
+                        <li>Analyze gas usage: <code>Ctrl+Shift+P</code> → "Blockchain: Gas Analysis"</li>
+                        <li>Compare optimizations with gas snapshots</li>
+                    </ol>
+                    <div class="code-block">
+                        <pre><code class="language-javascript">// Gas optimization test example
+describe("Gas Optimization", function () {
+  it("Should use minimal gas for batch operations", async function () {
+    const { token, owner } = await loadFixture(deployTokenFixture);
+    
+    // Test single transfers vs batch transfer
+    const recipients = [addr1.address, addr2.address, addr3.address];
+    const amounts = [100, 200, 300];
+    
+    // Measure gas for individual transfers
+    const individualGas = [];
+    for (let i = 0; i < recipients.length; i++) {
+      const tx = await token.transfer(recipients[i], amounts[i]);
+      const receipt = await tx.wait();
+      individualGas.push(receipt.gasUsed);
+    }
+    
+    // Reset state and test batch transfer
+    const batchTx = await token.batchTransfer(recipients, amounts);
+    const batchReceipt = await batchTx.wait();
+    
+    // Batch should be more efficient
+    const totalIndividualGas = individualGas.reduce((a, b) => a.add(b));
+    expect(batchReceipt.gasUsed).to.be.lt(totalIndividualGas);
+  });
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">4</div>
+                        <h4>Fuzz Testing</h4>
+                    </div>
+                    <p>Use Foundry for property-based testing:</p>
+                    <div class="code-block">
+                        <pre><code class="language-solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+import "forge-std/Test.sol";
+import "../contracts/Token.sol";
+
+contract TokenFuzzTest is Test {
+    Token token;
+    
+    function setUp() public {
+        token = new Token("TestToken", "TT", 1000000 * 10**18);
+    }
+    
+    function testFuzzTransfer(address to, uint256 amount) public {
+        // Assume valid conditions
+        vm.assume(to != address(0));
+        vm.assume(to != address(this));
+        vm.assume(amount <= token.balanceOf(address(this)));
+        
+        uint256 balanceBefore = token.balanceOf(address(this));
+        uint256 toBalanceBefore = token.balanceOf(to);
+        
+        token.transfer(to, amount);
+        
+        // Invariant checks
+        assertEq(token.balanceOf(address(this)), balanceBefore - amount);
+        assertEq(token.balanceOf(to), toBalanceBefore + amount);
+    }
+    
+    function testFuzzMint(address to, uint256 amount) public {
+        vm.assume(to != address(0));
+        vm.assume(amount <= type(uint256).max - token.totalSupply());
+        
+        uint256 totalSupplyBefore = token.totalSupply();
+        uint256 balanceBefore = token.balanceOf(to);
+        
+        token.mint(to, amount);
+        
+        assertEq(token.totalSupply(), totalSupplyBefore + amount);
+        assertEq(token.balanceOf(to), balanceBefore + amount);
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <h2 id="debugging-guide">🐛 Advanced Debugging Tutorial</h2>
+                <p>Master the advanced debugging features of Blockchain Toolkit, including transaction tracing, state inspection, and EVM debugging.</p>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">1</div>
+                        <h4>Setup Debug Environment</h4>
+                    </div>
+                    <p>First, let's set up a contract with a bug to debug:</p>
+                    <div class="code-block">
+                        <pre><code class="language-solidity">// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.19;
+
+contract BuggyContract {
+    mapping(address => uint256) private balances;
+    uint256 public totalSupply;
+    
+    function mint(address to, uint256 amount) external {
+        // Bug: potential overflow
+        balances[to] += amount;
+        totalSupply += amount;
+    }
+    
+    function transfer(address to, uint256 amount) external {
+        // Bug: no balance check
+        balances[msg.sender] -= amount;
+        balances[to] += amount;
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">2</div>
+                        <h4>Debug Transaction</h4>
+                    </div>
+                    <p>Use the EVM debugger to trace problematic transactions:</p>
+                    <ol>
+                        <li>Deploy the contract and cause a failing transaction</li>
+                        <li>Copy the transaction hash</li>
+                        <li>Command Palette → "Blockchain: Debug Transaction"</li>
+                        <li>Paste the transaction hash</li>
+                        <li>Step through the execution to find the issue</li>
+                    </ol>
+                    <div class="alert alert-info">
+                        <strong>Pro Tip:</strong> Use the state inspector to view storage changes and identify where the bug occurs.
+                    </div>
+                </div>
+
+                <div class="tutorial-step">
+                    <div class="step-title">
+                        <div class="step-number">3</div>
+                        <h4>Advanced Debugging Features</h4>
+                    </div>
+                    <p>Blockchain Toolkit provides several debugging commands:</p>
+                    <ul>
+                        <li><strong>EVM State Inspector:</strong> View contract storage, memory, and stack</li>
+                        <li><strong>Transaction Tracer:</strong> Step through execution with gas tracking</li>
+                        <li><strong>Memory Analyzer:</strong> Inspect memory layout and heap usage</li>
+                        <li><strong>Call Stack Viewer:</strong> Navigate through function calls</li>
+                    </ul>
+                    <div class="alert alert-tip">
+                        <strong>Keyboard Shortcuts:</strong> Use F10 (step over), F11 (step into), and F5 (continue) for debugging navigation.
+                    </div>
+                </div>
+
+                <div class="alert alert-success">
+                    <strong>Ready to Learn More?</strong> These examples are just the beginning. Each tutorial includes complete source code, step-by-step instructions, and best practices. Visit our <a href="https://github.com/me-saurabhkohli/blockchain-toolkit/tree/main/examples">GitHub repository</a> for the complete examples and more advanced tutorials.
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script>
+        // Framework tabs functionality
+        document.querySelectorAll('.framework-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content
+                document.querySelectorAll('.framework-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.framework-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab
+                tab.classList.add('active');
+                
+                // Show corresponding content
+                const framework = tab.dataset.framework;
+                const content = document.getElementById(`${framework}-erc20`);
+                if (content) {
+                    content.classList.add('active');
+                }
+            });
+        });
+
+        // Sidebar navigation
+        document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Remove active class from all sidebar links
+                document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Scroll to target
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update active sidebar link on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('h2[id], h3[id]');
+            const scrollPos = window.scrollY + 150;
+            
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                const id = section.getAttribute('id');
+                const navLink = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
+                
+                if (navLink && scrollPos >= top && scrollPos <= bottom) {
+                    document.querySelectorAll('.sidebar-nav a').forEach(link => link.classList.remove('active'));
+                    navLink.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

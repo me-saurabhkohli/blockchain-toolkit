@@ -1,0 +1,71 @@
+# Build outputs
+.vscode/**
+.vscode-test/**
+out/test/**
+
+# Node modules (only include necessary dependencies)
+node_modules/**
+!node_modules/@types/**
+!node_modules/@vscode/**
+!node_modules/fs-extra/**
+!node_modules/glob/**
+!node_modules/node-fetch/**
+
+# Source files
+src/**
+test/**
+*.ts
+
+# Development and testing
+.gitignore
+.eslintrc.json
+.eslintrc.js
+tsconfig.json
+webpack.config.js
+*.map
+*.log
+
+# Test workspaces and validation files
+test-workspace/**
+test-workspaces/**
+comprehensive-validation.js
+final-report.js
+unified-systems-validation.js
+unified-validation.js
+validate.js
+
+# Documentation assets (keep only essential docs)
+docs/assets/screenshots/**
+assets/resources/**
+
+# Development scripts
+*.sh
+*.bat
+
+# Cache and temporary files
+.cache/**
+tmp/**
+temp/**
+
+# Git and CI/CD
+.git/**
+.github/**
+.gitattributes
+
+# Package manager files
+package-lock.json
+yarn.lock
+*.tgz
+
+# IDE files
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
